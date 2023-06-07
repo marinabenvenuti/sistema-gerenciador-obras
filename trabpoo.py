@@ -49,4 +49,4 @@ bobi=0
 cads=list()
 
     
-menu(iago)
+menu(bobi)
