@@ -1,4 +1,5 @@
 from herança_pedreiro import Pedreiro
+salario_pedreiros = 1500 #melhorar essa variável, talvez pedir pra o usuario digitar quanto vai ganhar o pedreiro por obra
 class Obra:
     def __init__(self, cod, cliente, materiaisusados, pedreiros, dataIn, dataFim, total):
         self.cod = cod
@@ -40,9 +41,29 @@ class Obra:
         
     def addPedreiros(self, aux, pedreiros, pedreirosusados):
         for i in range(aux):
-            aux2 = str(input('Digite o nome do pedreiro: '))
+            aux2 = str(input('Digite o cpf do pedreiro: ')) #pesquisa por cpf, depois adicionar mais opções de pesquisa
             contador = 0
             if aux2 == #continuar depois
+            
+    def setPedreiros(self, pedreirosusados):
+        self.pedreiros = pedreirosusados
+            
+    def setDataIn(self, dataIn):
+        self.dataIn = dataIn
+            
+    def setDataFim(self, dataFim):
+        self.dataFim = dataFim
+        
+    def calculaObra(pedreirosusados, materiaisusados):
+        total = (len(pedreirosusados)*salario_pedreiros)+0.05*salario_pedreiros
+        for i in range(len(materiaisusados)):
+            for material in materiaisusados:
+                total += material['qtd'] * material['preço']
+                
+        return total
+    
+    def setTotal(self, totalObra):
+        self.total = totalObra
             
         
                     
