@@ -3,7 +3,7 @@ from funcionarios import Funcionario
 from obras import Obra
 
 def verConsul(x):
-    while not x in ["1","2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18"]:
+    while not x in ["1","2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17"]:
         x=input("Digite novamente o número da ação: ")
     return x
 
@@ -87,16 +87,17 @@ while True:
     print("12) Pesquisar funcionário")
     print("13) Cadastrar funcionário")
     print("14) Editar funcionário")
-    print("15) Cadastrar funcionário")
-    print("16) Excluir funcionário")
-    print("17) Ver o faturamento atual da empresa")
-    print("18) Encerrar o programa")
+    print("15) Excluir funcionário")
+    print("16) Ver o faturamento atual da empresa")
+    print("17) Encerrar o programa")
     print("  ")
         
     consulta=input("Numero da ação a ser realizada: ")
     ver_consul=verConsul(consulta)
 
     if consulta==1:
+        #exibir a lista de todas as obras cadastradas
+        print('Obras cadastradas:')
         for i in obras:
             print (' ')
             if i<10:
@@ -112,6 +113,7 @@ while True:
         
         
     elif consulta==2:
+        #pesquisa de obra específica
         print('Pesquisar obra')
         print('1 - Pesquisar pelo ID')
         print('2 - Pesquisar pelo nome do cliente')
@@ -151,6 +153,7 @@ while True:
                     print("Nome não cadastrado!")
                     
     elif colsulta==3:
+        #cadastro de nova obra
         materiaisusados = []
         pedreirosusados = []
         print('Cadastro de obra')
@@ -192,6 +195,7 @@ while True:
         obras.append(o) #adicionando à lista de objetos obra
         
     elif consulta==4:
+        #edição de obra
         print('Alterar informação de obra')
         idO_pesquisa = str(input('Digite o ID da obra: '))
         flag=False
@@ -233,6 +237,7 @@ while True:
                 print("ID não encontrado!")
                 
     elif consulta==5:
+        #exclusão de obra
         print('Excluir obra')
         idO_pesquisa = str(input('Digite o ID da obra: '))
         
@@ -307,5 +312,20 @@ while True:
         #exibir todos os funcionários da empresa
         
     elif consulta==12:
-        #cadastro de funcionários
+        #pesquisa de funcionário específico
+        
+    elif consulta==13:
+        #cadastro de novo funcionário
+        
+    elif consulta==14:
+        #edição de funcionário
+        
+    elif consulta==15:
+        #exclusão de funcionário
+        
+    elif consulta==16:
+        #exibição do faturamento atual da empresa
+        
+    elif consulta==17:
+        #conclusão do programa
         
