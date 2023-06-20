@@ -284,7 +284,20 @@ while True:
         material['qtd'] = int(0)
         material['preço'] = float(input('Digite o preço do material, à partir da forma de medição: '))
         materiais.append(material.copy())
-    
-    
+
+    elif consulta==10:
+
+
+
+    elif consulta==11:
+
+
+
+    elif consulta==12:
+
+
+
+    elif consulta==13:
+        
 
  
