@@ -98,7 +98,7 @@ while True:
 
     if consulta==1:
         for i in obras:
-            print(' ')
+            print (' ')
             if i<10:
                 print ('Obra 0{}'.format(i+1))
             else:
