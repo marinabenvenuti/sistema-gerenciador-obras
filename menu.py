@@ -97,7 +97,16 @@ while True:
     ver_consul=verConsul(consulta)
 
     if consulta==1:
-        
+        for i in obras:
+            print(' ')
+            if i<10:
+                print ('Obra 0{}'.format(i+1))
+            else:
+                print ('Obra {}'.format(i))
+            print ('Codigo da obra:', i.cod)
+            print ('Cliente:', i.cliente)
+            print ('Inicio da obra:', i.dataIn)
+            print('Fim da obra:', i.dataFim)
         
     elif consulta==2:
         print('Pesquisar obra')
