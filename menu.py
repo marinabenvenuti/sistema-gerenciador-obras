@@ -80,9 +80,9 @@ while True:
     print("5) Excluir obra") #marina
     print("6) Ver lista de materiais disponíveis") #iago?
     print("7) Pesquisar material") #marina
-    print("8) Cadastrar material") #marina (ver sobra estoque!!!!!)
-    print("9) Editar material")
-    print("10) Excluir material")
+    print("8) Cadastrar material") #marina (ver sobre estoque!!!!!)
+    print("9) Editar material") #marina
+    print("10) Excluir material") #marina
     print("11) Ver todos os funcionários cadastrados") #iago?
     print("12) Pesquisar funcionário")
     print("13) Cadastrar funcionário")
@@ -102,11 +102,14 @@ while True:
             if i<10:
                 print ('Obra 0{}'.format(i+1))
             else:
-                print ('Obra {}'.format(i))
-            print ('Codigo da obra:', i.cod)
-            print ('Cliente:', i.cliente)
-            print ('Inicio da obra:', i.dataIn)
-            print('Fim da obra:', i.dataFim)
+                print ('Obra {}'.format(i+1))
+                print ('Codigo da obra:', i.get_cod())
+                print ('Cliente:', i.get_cliente())
+                print ('Inicio da obra:', i.get_dataIn())
+                print('Fim da obra:', i.get_dataFim())
+                print('Total gastado:', i.get_total())
+        
+        
         
     elif consulta==2:
         print('Pesquisar obra')
@@ -280,24 +283,29 @@ while True:
             if material['nome'] == nomeMat:
                 material = {}
                 material['nome'] = str(input('Digite o nome do material: '))
-        material['medição'] = str(input('Digite a forma de medição do material: '))
-        material['qtd'] = int(0)
-        material['preço'] = float(input('Digite o preço do material, à partir da forma de medição: '))
-        materiais.append(material.copy())
-
+                material['medição'] = str(input('Digite a forma de medição do material: '))
+                material['qtd'] = int(0)
+                material['preço'] = float(input('Digite o preço do material, à partir da forma de medição: '))
+                materiais.append(material.copy())
+                flag = True
+        if flag == False:
+            print('Material não encontrado')
+            
     elif consulta==10:
-
-
-
+        #excluir material no dicionário de materiais
+        print('Excluir material')
+        nomeMat = input('Digite o nome do material: ')
+        flag = False
+        for material in materiais:
+            if material['nome'] == nomeMat:
+                materiais.remove(material)
+                flag = True:
+        if flag == False:
+            print('Material não encontrado')
+            
     elif consulta==11:
-
-
-
-    elif consulta==12:
-
-
-
-    elif consulta==13:
+        #exibir todos os funcionários da empresa
         
-
- 
+    elif consulta==12:
+        #cadastro de funcionários
+        
