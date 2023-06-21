@@ -6,5 +6,5 @@ class Funcionario:
         self.fone = fone
         self.salario = salario
         self.cadastro = cadastro
-        self.cargo = cargo
+        
 
