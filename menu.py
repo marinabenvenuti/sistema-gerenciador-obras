@@ -107,8 +107,8 @@ while True:
             print ('Codigo da obra:', i.get_cod())
             print ('Cliente:', i.get_cliente())
             print ('Inicio da obra:', i.get_dataIn())
-            print('Fim da obra:', i.get_dataFim())
-            print('Total gastado:', i.get_total())
+            print ('Fim da obra:', i.get_dataFim())
+            print ('Total gastado:', i.get_total())
         
         
         
@@ -310,7 +310,14 @@ while True:
             
     elif consulta==11:
         #exibir todos os funcionários da empresa
-        
+        for i in funcionarios:
+            print ("   ")
+            print ('Cadastro:', i.cadastro)
+            print ('Nome:', i.nome, i.sobrenome)
+            print ('Salario:', i.salario)
+            print ('CPF: {}.{}.{}-{}'.format(self.cpf[0:3], self.cpf[3:6], self.cpf[6:9], self.cpf[9:11]))
+            print ('Contato: {}-{}'.format(self.fone[0:5], self.fone[5:9]))
+            
     elif consulta==12:
         #pesquisa de funcionário específico
         
