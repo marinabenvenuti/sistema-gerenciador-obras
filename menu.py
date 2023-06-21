@@ -98,17 +98,17 @@ while True:
     if consulta==1:
         #exibir a lista de todas as obras cadastradas
         print('Obras cadastradas:')
+        ContObras=0
         for i in obras:
+            ContObras+=1
             print (' ')
-            if i<10:
-                print ('Obra 0{}'.format(i+1))
-            else:
-                print ('Obra {}'.format(i+1))
-                print ('Codigo da obra:', i.get_cod())
-                print ('Cliente:', i.get_cliente())
-                print ('Inicio da obra:', i.get_dataIn())
-                print('Fim da obra:', i.get_dataFim())
-                print('Total gastado:', i.get_total())
+            
+            print ('Obra {}'.format(ContObras))
+            print ('Codigo da obra:', i.get_cod())
+            print ('Cliente:', i.get_cliente())
+            print ('Inicio da obra:', i.get_dataIn())
+            print('Fim da obra:', i.get_dataFim())
+            print('Total gastado:', i.get_total())
         
         
         
