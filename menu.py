@@ -84,10 +84,10 @@ while True:
     print("9) Editar material") #marina
     print("10) Excluir material") #marina
     print("11) Ver todos os funcionários cadastrados") #iago?
-    print("12) Pesquisar funcionário")
-    print("13) Cadastrar funcionário")
-    print("14) Editar funcionário")
-    print("15) Excluir funcionário")
+    print("12) Pesquisar funcionário") #iago (se basear no pesquisar obra)
+    print("13) Cadastrar funcionário") #iago
+    print("14) Editar funcionário") #iago
+    print("15) Excluir funcionário") #iago
     print("16) Ver o faturamento atual da empresa")
     print("17) Encerrar o programa")
     print("  ")
