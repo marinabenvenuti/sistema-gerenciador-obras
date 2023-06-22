@@ -1,4 +1,7 @@
 import random
+funcionarios = []
+pedreiros = []
+gestores = []
 
 class Funcionario:
     def __init__(self, Fun_Nome, Fun_Sobrenome, Fun_CPF, Fun_Fone, Fun_Cadastro, Fun_Salario):
@@ -17,7 +20,7 @@ class Gestor(Funcionario):
         
         self.contra= int(input('Data da contrataçao[AAAA]: '))
         self.Sal_Calc=(self.salario+(500*(2023-self.contra)))
-        lista.append(self)
+        gestores.append(self)
         
 class Pedreiro(Funcionario):
     def __init__(self, Fun_Nome, Fun_Sobrenome, Fun_CPF, Fun_Fone, Fun_Cadastro, Fun_Salario):
@@ -25,3 +28,5 @@ class Pedreiro(Funcionario):
         
         self.NumObras=0
         self.Sal_Calc=(self.salario+(350*(2023-self.NumObras)))
+        funcionarios.append(self)
+        pedreiros.append(self)
