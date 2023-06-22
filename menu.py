@@ -1,3 +1,4 @@
+import random
 from datetime import datetime
 from funcionarios import *
 from obras import Obra
