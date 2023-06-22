@@ -73,17 +73,17 @@ while True:
     print("[--------------------Sistema Gerenciador de Obras--------------------]")
     print("[--------------------------------Menu--------------------------------]")
     print("  ")
-    print("1) Ver todas as obras cadastradas") #iago?
+    print("1) Ver todas as obras cadastradas") #iago? feito
     print("2) Pesquisar obra") #marina
     print("3) Cadastrar obra") #marina
     print("4) Editar obra") #marina
     print("5) Excluir obra") #marina
-    print("6) Ver lista de materiais disponíveis") #iago?
+    print("6) Ver lista de materiais disponíveis") #iago? lista de materiais por fazer
     print("7) Pesquisar material") #marina
     print("8) Cadastrar material") #marina (ver sobre estoque!!!!!)
     print("9) Editar material") #marina
     print("10) Excluir material") #marina
-    print("11) Ver todos os funcionários cadastrados") #iago?
+    print("11) Ver todos os funcionários cadastrados") #iago? feito
     print("12) Pesquisar funcionário") #iago (se basear no pesquisar obra)
     print("13) Cadastrar funcionário") #iago
     print("14) Editar funcionário") #iago
