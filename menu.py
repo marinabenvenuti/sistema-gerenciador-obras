@@ -327,7 +327,23 @@ while True:
 
     elif consulta==12:
         #pesquisa de funcionário específico
-        
+        print('   ')
+        Pes_Fun=input('Nome do funcionario a ser pesquisado: ').title()
+        for i in funcionarios:
+            if i.nome==Pes_Fun:
+                print ("   ")
+                print ('Cargo:', i.__class__.__name__)
+                print ('Cadastro:', i.cadastro)
+                print ('Nome:', i.nome)
+                print ('Salario: R${}'.format(i.Sal_Calc))
+                print ('CPF: {}.{}.{}-{}'.format(i.cpf[0:3], i.cpf[3:6], i.cpf[6:9], i.cpf[9:11]))
+                print ('Contato: {}-{}'.format(i.fone[0:5], i.fone[5:9]))
+                
+                if i.__class__.__name__=='Gestor':
+                    print ('Data contrataçao:', i.contra)
+                if i.__class__.__name__=='Pedreiro':
+                    print ('Presente em {} obras'.format(i.NumObras))
+
     elif consulta==13:
         #cadastro de novo funcionário
         Faz_Cad=input('O que deseja cadastrar? ').title()   
