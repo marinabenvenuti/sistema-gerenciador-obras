@@ -14,9 +14,8 @@ def verificaData(aux):
         #fazer função pra verificar se a data está certa
                 
 #main
+#importar as listas do funça
 obras = []
-funcionarios = []
-pedreiros = []
 pedreirosusados = []
 materiais = []
 materiaisusados = []
@@ -324,7 +323,20 @@ while True:
         
     elif consulta==13:
         #cadastro de novo funcionário
+        Faz_Cad=input('O que deseja cadastrar? ').title()   
+        Fun_Nome=input('Nome do Funcionario: ')
+        Fun_Sobrenome=input('Sobrenome do Funcionario: ')
+        Fun_CPF=input('CPF do funcionario[sem"." e "-"]: ')
+        Fun_Fone=input('Telefone do Funcionario[Com "9" e sem DDD]: ')
+        Fun_Cadastro=(random.randint(10000,100000))
+        Fun_Salario=1000
         
+        if Faz_Cad=='Gestor':
+            Gestor(Fun_Nome, Fun_Sobrenome, Fun_CPF, Fun_Fone, Fun_Cadastro, Fun_Salario)
+
+        elif Faz_Cad=='Pedreiro':
+            Pedreiro(Fun_Nome, Fun_Sobrenome, Fun_CPF, Fun_Fone, Fun_Cadastro)
+            
     elif consulta==14:
         #edição de funcionário
         
