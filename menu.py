@@ -312,30 +312,36 @@ while True:
         #exibir todos os funcionários da empresa
         for i in funcionarios:
             print ("   ")
+            print ('Cargo:', i.__class__.__name__)
             print ('Cadastro:', i.cadastro)
-            print ('Nome:', i.nome, i.sobrenome)
-            print ('Salario:', i.salario)
-            print ('CPF: {}.{}.{}-{}'.format(self.cpf[0:3], self.cpf[3:6], self.cpf[6:9], self.cpf[9:11]))
-            print ('Contato: {}-{}'.format(self.fone[0:5], self.fone[5:9]))
-            
+            print ('Nome:', i.nome)
+            print ('Salario: R${}'.format(i.Sal_Calc))
+            print ('CPF: {}.{}.{}-{}'.format(i.cpf[0:3], i.cpf[3:6], i.cpf[6:9], i.cpf[9:11]))
+            print ('Contato: {}-{}'.format(i.fone[0:5], i.fone[5:9]))
+
+            if i.__class__.__name__=='Gestor':
+                print ('Data contrataçao:', i.contra)
+            if i.__class__.__name__=='Pedreiro':
+                print ('Presente em {} obras'.format(i.NumObras))
+
+
     elif consulta==12:
         #pesquisa de funcionário específico
         
     elif consulta==13:
         #cadastro de novo funcionário
         Faz_Cad=input('O que deseja cadastrar? ').title()   
-        Fun_Nome=input('Nome do Funcionario: ')
-        Fun_Sobrenome=input('Sobrenome do Funcionario: ')
+        Fun_Nome=input('Nome do Funcionario: ').title()
         Fun_CPF=input('CPF do funcionario[sem"." e "-"]: ')
         Fun_Fone=input('Telefone do Funcionario[Com "9" e sem DDD]: ')
         Fun_Cadastro=(random.randint(10000,100000))
         Fun_Salario=1000
         
         if Faz_Cad=='Gestor':
-            Gestor(Fun_Nome, Fun_Sobrenome, Fun_CPF, Fun_Fone, Fun_Cadastro, Fun_Salario)
+            Gestor(Fun_Nome, Fun_CPF, Fun_Fone, Fun_Cadastro, Fun_Salario)
 
         elif Faz_Cad=='Pedreiro':
-            Pedreiro(Fun_Nome, Fun_Sobrenome, Fun_CPF, Fun_Fone, Fun_Cadastro)
+            Pedreiro(Fun_Nome, Fun_CPF, Fun_Fone, Fun_Cadastro, Fun_Salario)
             
     elif consulta==14:
         #edição de funcionário
