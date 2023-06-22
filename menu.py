@@ -1,5 +1,5 @@
 from datetime import datetime
-from funcionarios import Funcionario
+from funcionarios import *
 from obras import Obra
 
 def verConsul(x):
