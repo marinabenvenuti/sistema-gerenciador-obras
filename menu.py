@@ -346,6 +346,7 @@ while True:
 
     elif consulta==13:
         #cadastro de novo funcionário
+        print('   ')
         Faz_Cad=input('O que deseja cadastrar? ').title()   
         Fun_Nome=input('Nome do Funcionario: ').title()
         Fun_CPF=input('CPF do funcionario[sem"." e "-"]: ')
@@ -364,6 +365,7 @@ while True:
         
     elif consulta==15:
         #exclusão de funcionário
+        print('   ')
         Del_Fun=input('Nome do funcionario a ser excluido: ').title()
         for i in funcionarios:
             if i.nome==Del_Fun:
@@ -379,7 +381,8 @@ while True:
                     print ('Data contrataçao:', i.contra)
                 if i.__class__.__name__=='Pedreiro':
                     print ('Presente em {} obras'.format(i.NumObras))
-                    
+
+                print('   ')
                 Del_Fun_F=input('excluir este funcionario?').title()
                 if Del_Fun_F=='sim':
                     del i
