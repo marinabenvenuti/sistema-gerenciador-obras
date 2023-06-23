@@ -385,7 +385,7 @@ while True:
                 print('   ')
                 Del_Fun_F=input('excluir este funcionario?').title()
                 if Del_Fun_F=='sim':
-                    del i
+                    del funcionarios.remove(i)
                     
     elif consulta==16:
         #exibição do faturamento atual da empresa
