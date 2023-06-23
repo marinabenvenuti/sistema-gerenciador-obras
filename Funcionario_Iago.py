@@ -11,13 +11,26 @@ class Funcionario:
         self.cadastro = Fun_Cadastro
         self.salario = Fun_Salario
         
+    def setNome(self, nome):
+        self.nome = nome
+    
+    def setCPF(self, cpf):
+        self.cpf = cpf
+        
+    def setFone(self, fone):
+        self.fone = fone
+        
+    def setCadastro(self, cadastro):
+        self.cadastro = cadastro
+        
+    
         
 class Gestor(Funcionario):
     
     def __init__(self, Fun_Nome, Fun_CPF, Fun_Fone, Fun_Cadastro, Fun_Salario):
         super().__init__(Fun_Nome, Fun_CPF, Fun_Fone, Fun_Cadastro, Fun_Salario)
         
-        self.contra= int(input('Data da contrataçao[AAAA]: '))
+        self.contra= int(input('Ano da contratação[AAAA]: '))
         self.Sal_Calc=(self.salario+(500*(2023-self.contra)))
         gestores.append(self)
         funcionarios.append(self)
