@@ -381,8 +381,8 @@ while True:
                     print ('Presente em {} obras'.format(i.NumObras))
                     
                 Del_Fun_F=input('excluir este funcionario?').title()
-                    if Del_Fun_F=='sim':
-                        del i
+                if Del_Fun_F=='sim':
+                    del i
                     
     elif consulta==16:
         #exibição do faturamento atual da empresa
