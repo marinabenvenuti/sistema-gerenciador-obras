@@ -5,16 +5,18 @@ from obras import *
 from funcionarios import *
 
 def printarObra(i):
-    print(' ')
-    print('ID:', i.getCod())  
-    print('Cliente:', i.getCliente())
-    for i in range(len(i.materiais)):
-        print (i.materiais[i]['nome'], "em quantidade de:", i.materiais[i]['qtd'], "(unidade de medida em{}".format(i.materiais[i]['medição']))
+    contObras=1
+    for i in obras:
+        print('  ')
+        print('ID:', i.cod)
+        print ('Cliente: ', i.cliente)
+        for j in range(len(i.materiais)):
+            print (i.materiais[j]['nome'], "em quantidade de", i.materiais[j]['qtd'], "(unidade de medida em {})".format(i.materiais[j]['medição']))
+        print('Mestre de obra:', i.pedreiro)
+        print('Data de início:', i.dataIn)
+        print('Data de fim:', i.dataFim)
+        print('Valor total: R${}'.format(i.total))
     
-    print('Mestre de obra:', i.getPedreiro())
-    print('Data de início:', i.getDataIn())
-    print('Data de fim:', i.getDataFim())
-    print('Valor total:', i.getTotal())
     
 #def verificaData(aux):
  #   verif = 0
@@ -47,10 +49,8 @@ def opcoesObras():
                 print('Nenhuma obra cadastrada')
             else:
                 print('--------------------------------Obras cadastradas:--------------------------------')
-                ContObras=0
-                for i in obras:
-                    ContObras+=1
-                    printarObra(i)
+                pn=0
+                printarObra(pn)
                     
         elif consultaObra==2:
             #pesquisa de obra específica
@@ -89,7 +89,7 @@ def opcoesObras():
 
             material = {}
             material['nome'] = str('areia')
-            material['medição'] = str('m3')
+            material['medição'] = str('m³')
             material['qtd'] = int(0)
             material['preço'] = float(170.00)
             materiais.append(material.copy())
@@ -103,7 +103,7 @@ def opcoesObras():
     
             material = {}
             material['nome'] = str('brita')
-            material['medição'] = str('m3')
+            material['medição'] = str('m³')
             material['qtd'] = int(0)
             material['preço'] = float(96.00)
             materiais.append(material.copy())
@@ -117,7 +117,7 @@ def opcoesObras():
     
             material = {}
             material['nome'] = str('telha de aço')
-            material['medição'] = str('m2')
+            material['medição'] = str('m²')
             material['qtd'] = int(0)
             material['preço'] = float(20.00)
             materiais.append(material.copy())
@@ -131,7 +131,7 @@ def opcoesObras():
             
             print('--------------------------------Cadastrar obra:--------------------------------')
                 
-            cliente = str(input('Cliente: ')).title
+            cliente = input('Cliente: ').title()
             
             o = Obra('', '', '', '', '', '', '') # cria o objeto Obra
             cod = random.randint(10000, 100000)
