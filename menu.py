@@ -6,13 +6,15 @@ from funcionarios import *
 
 def printarObra(i):
     print(' ')
-    print('ID:', i.get_cod())  
-    print('Cliente:', i.get_cliente())
-    print('Materiais:', i.get_materiais())
-    print('Mestre de obra:', i.get_pedreiro())
-    print('Data de início:', i.get_dataIn())
-    print('Data de fim:', i.get_dataFim())
-    print('Valor total:', i.get_total())
+    print('ID:', i.getCod())  
+    print('Cliente:', i.getCliente())
+    for i in range(len(i.materiais)):
+        print (i.materiais[i]['nome'], "em quantidade de:", i.materiais[i]['qtd'], "(unidade de medida em{}".format(i.materiais[i]['medição']))
+    
+    print('Mestre de obra:', i.getPedreiro())
+    print('Data de início:', i.getDataIn())
+    print('Data de fim:', i.getDataFim())
+    print('Valor total:', i.getTotal())
     
 #def verificaData(aux):
  #   verif = 0
@@ -164,10 +166,13 @@ def opcoesObras():
             dataFim = datetime.strptime(aux, '%d/%m/%Y')
             o.setDataFim(dataFim)
             
-            totalObra = calculaObra(materiais)
+            totalObra = 350*1.22
+            for i in materiais:
+                totalObra += material['qtd'] * material['preço']
             o.setTotal(totalObra)
             
             obras.append(o) #adicionando à lista de objetos obra
+            print('Obra cadastrada com sucesso!')
             
         elif consultaObra == 4:
             print('--------------------------------Editar obra:--------------------------------')
@@ -316,17 +321,17 @@ def opcoesFuncionarios():
             for i in funcionarios:
                 if i.nome == editFunc:
                     nome = input('Digite o novo nome do funcionário: ')
-                    i.set_nome(nome)
+                    i.setNome(nome)
                     
                     cpf = input('Digite o novo cpf do funcionário: ')
-                    i.set_cpf(cpf)
+                    i.setCpf(cpf)
                     
                     fone = input('Digite o novo telefone do funcionário: ')
-                    i.set_fone(fone)
+                    i.setFone(fone)
                     
                     if i.__class__.__name__=='Gestor':
                         contratacao = int(input('Digite o novo ano de contratação do funcionário: '))
-                        i.set_contra(contratacao)
+                        i.setContra(contratacao)
                         
         if consultaFunc==5:
             #exclusão de funcionário
