@@ -24,6 +24,7 @@ class Funcionario:
         self.cadastro = cadastro
         
     def calculaSalario(self, salario):
+        print(f'O salário básico é R${salario}')
         
     
         
@@ -34,7 +35,7 @@ class Gestor(Funcionario):
         gestores.append(self)
         funcionarios.append(self)
         
-    def calculaSalario(self, salario):
+    def calculaSalario(salario):
         salarioTot = salario+(500*(2023-self.contra))
         return salarioTot
         
@@ -49,7 +50,7 @@ class Pedreiro(Funcionario):
         funcionarios.append(self)
         pedreiros.append(self)
         
-    def calculaSalario(self, salario):
+    def calculaSalario(salario):
         salarioTot = salario+(350*(self.NumObras))
         return salarioTot
         
