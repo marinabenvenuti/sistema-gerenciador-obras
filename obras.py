@@ -2,7 +2,7 @@ from herança_pedreiro import Pedreiro
 salario_pedreiros = 1500 #melhorar essa variável, talvez pedir pra o usuario digitar quanto vai ganhar o pedreiro por obra
     
 class Obra:
-    def __init__(self, cod, cliente, materiaisusados, pedreiros, dataIn, dataFim, total):
+    def __init__(self, cod, cliente, materiais, pedreiros, dataIn, dataFim, total):
         self.cod = cod
         self.cliente = cliente
         self.materiais = materiais
