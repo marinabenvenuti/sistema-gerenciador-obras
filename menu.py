@@ -222,86 +222,6 @@ def opcoesObras():
         if consultaObra == 6:
             break
         
-def opcoesMateriais():
-    while True:
-        print("[--------------------------------Menu de Materiais--------------------------------]")
-        print("  ")
-        print("1) Exibir todos os materiais cadastrados")
-        print("2) Pesquisar material")
-        print("3) Cadastrar material")
-        print("4) Editar material")
-        print("5) Excluir material")
-        print("6) Voltar para o menu principal")
-        print("  ")
-            
-        consultaMaterial=input("Numero da ação a ser realizada: ")
-        consultaMaterial=verConsul(consulta)
-        
-        if consultaMaterial==1:
-            print("[--------------------------------Lista de Materiais--------------------------------]")
-            print(' ')
-            for material in materiais:
-                print('Nome: ', material['nome'])
-                print('Medido por: ', material['medição'])
-                print('Preço: R$', material['preço'])
-                print(' ')  
-            
-        if consultaMaterial==2:
-            print("[--------------------------------Pesquisar materiais--------------------------------]")
-            flag = False
-            aux = input('Digite o nome do material: ')
-            for material in materiais:
-                if material['nome'] == aux:
-                    print('Nome: ', material['nome'])
-                    print('Medido por: ', material['medição'])
-                    print('Preço: R$', material['preço'])
-                    flag = True
-                    #ver sobre estoque
-            if flag == False:
-                print('Material não encontrado!')
-                
-        if consultaMaterial==3:
-            #cadastrar material novo no dicionário (ver sobre cadastrar estoque de materiais)
-            print("[--------------------------------Cadastrar materiais--------------------------------]")
-            material = {}
-            material['nome'] = str(input('Digite o nome do material: '))
-            material['medição'] = str(input('Digite a forma de medição do material: '))
-            material['qtd'] = int(0)
-            material['preço'] = float(input('Digite o preço do material, à partir da forma de medição: '))
-            materiais.append(material.copy())
-            print('Material cadastrado com sucesso!')
-            
-        if consultaMaterial==4:
-            #editar material no dicionário de materiais
-            print("[--------------------------------Editar material--------------------------------]")
-            nomeMat = input('Digite o nome do material: ')
-            flag = False
-            for material in materiais:
-                if material['nome'] == nomeMat:
-                    material = {}
-                    material['nome'] = str(input('Digite o nome do material: '))
-                    material['medição'] = str(input('Digite a forma de medição do material: '))
-                    material['qtd'] = int(0)
-                    material['preço'] = float(input('Digite o preço do material, à partir da forma de medição: '))
-                    materiais.append(material.copy())
-                    flag = True
-            if flag == False:
-                print('Material não encontrado')
-                
-        if consultaMaterial==5:
-            #excluir material no dicionário de materiais
-            print("[--------------------------------Excluir material--------------------------------]")
-            nomeMat = input('Digite o nome do material: ')
-            flag = False
-            for material in materiais:
-                if material['nome'] == nomeMat:
-                    materiais.remove(material)
-                    flag = True
-            if flag == False:
-                print('Material não encontrado')
-            
-        if consultaMaterial==6:
-            break
         
 def opcoesFuncionarios():
     while True:
@@ -432,11 +352,23 @@ def opcoesFuncionarios():
             break
         
 def faturamento():
-    #fazer
     print("[--------------------------------Faturamento atual:--------------------------------]")
+    dinheiroGestores = 0
+    for i in gestores:
+        dinheiroGestores = i.salario
+    aux = 0    
+    for i in pedreiros:
+        aux += i.salario-1000
+    
+    dinheiroPedreiros = len(pedreiros)*1000
+    
+    for i in obras:
+        dinheiroObras = i.total-aux
+    dinTotal = dinheiroObras - dinheiroGestores - dinheiroPedreiros
+    print(f'O faturamento atual da empresa é de R${dinTotal}')
     
 def consultaMain(x):
-    while not x in ["1","2", "3", "4", "5"]:
+    while not x in ["1","2", "3", "4"]:
         x=input("Digite novamente o número da ação: ")
     return x
 
@@ -447,10 +379,9 @@ while True:
     print("[--------------------------------Menu--------------------------------]")
     print("  ")
     print("1) Obras")
-    print("2) Materiais")
-    print("3) Funcionários")
-    print("4) Faturamento da empresa")
-    print("5) Encerrar programa")
+    print("2) Funcionários")
+    print("3) Faturamento da empresa")
+    print("4) Encerrar programa")
     print("  ")
         
     consulta=input("Numero da ação a ser realizada: ")
@@ -458,15 +389,12 @@ while True:
     
     if consulta == 1:
         opcoesObras()
-        
-    elif consulta == 2:
-        opcoesMateriais()
             
-    elif consulta == 3:
+    elif consulta == 2:
         opcoesFunc()
         
-    elif consulta == 4:
+    elif consulta == 3:
         faturamento()
     
-    elif consulta == 5:
+    elif consulta == 4:
         break
