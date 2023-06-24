@@ -80,7 +80,50 @@ def opcoesObras():
                             
         if consultaObra==3:
             #cadastro de nova obra
-            materiaisusados = []
+            materiais = []
+
+            material = {}
+            material['nome'] = str('areia')
+            material['medição'] = str('m3')
+            material['qtd'] = int(0)
+            material['preço'] = float(170.00)
+            materiais.append(material.copy())
+    
+            material = {}
+            material['nome'] = str('cal')
+            material['medição'] = str('kg')
+            material['qtd'] = int(0)
+            material['preço'] = float(13.00)
+            materiais.append(material.copy())
+    
+            material = {}
+            material['nome'] = str('brita')
+            material['medição'] = str('m3')
+            material['qtd'] = int(0)
+            material['preço'] = float(96.00)
+            materiais.append(material.copy())
+    
+            material = {}
+            material['nome'] = str('cimento')
+            material['medição'] = str('kg')
+            material['qtd'] = int(0)
+            material['preço'] = float(30.00)
+            materiais.append(material.copy())
+    
+            material = {}
+            material['nome'] = str('telha de aço')
+            material['medição'] = str('m2')
+            material['qtd'] = int(0)
+            material['preço'] = float(20.00)
+            materiais.append(material.copy())
+    
+            material = {}
+            material['nome'] = str('vergalhão')
+            material['medição'] = str('m')
+            material['qtd'] = int(0)
+            material['preço'] = float(16.00)
+            materiais.append(material.copy())
+            
             print('--------------------------------Cadastrar obra:--------------------------------')
                 
             cliente = str(input('Cliente: ')).title
@@ -89,12 +132,10 @@ def opcoesObras():
             o.set_cod(random.randint(10000, 100000))
             o.set_cliente(cliente)
             
-            aux = int(input('Digite a quantidade de materiais que serão utilizados: '))
-            while aux>len(materiais)+1:
-                aux = int(input('Valor inválido! Digite a quantidade de materiais que serão utilizados novamente: '))
-            materiaisusados.append(addMateriais(aux, materiaisusados))
-            
             o.set_materiais(materiaisusados)
+
+
+
             
             flag = False
             while True: #isso pode ser colocado numa função pois é usado na edição também
