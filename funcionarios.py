@@ -1,15 +1,15 @@
-import random
 funcionarios = []
 pedreiros = []
 gestores = []
 
+
 class Funcionario:
-    def __init__(self, Fun_Nome, Fun_CPF, Fun_Fone, Fun_Cadastro, salarioTot):
+    def __init__(self, Fun_Nome, Fun_CPF, Fun_Fone, Fun_Cadastro, Fun_Salario):
         self.nome = Fun_Nome
         self.cpf = Fun_CPF
         self.fone = Fun_Fone
         self.cadastro = Fun_Cadastro
-        self.salario = salarioTot
+        self.salario = Fun_Salario
         
     def setNome(self, nome):
         self.nome = nome
@@ -26,17 +26,21 @@ class Funcionario:
     def calculaSalario(self, salario):
         print(f'O salário básico é R${salario}')
         
+    def setSalario(self, salarioTot):
+        self.salario = salarioTot
+        
+        
     
         
 class Gestor(Funcionario):    
-    def __init__(self, Fun_Nome, Fun_CPF, Fun_Fone, Fun_Cadastro, salarioTot, contra):
-        super().__init__(Fun_Nome, Fun_CPF, Fun_Fone, Fun_Cadastro, salarioTot)
-        self.contra= anoContrat
+    def __init__(self, Fun_Nome, Fun_CPF, Fun_Fone, Fun_Cadastro, Fun_Salario, anoContrat):
+        super().__init__(Fun_Nome, Fun_CPF, Fun_Fone, Fun_Cadastro, Fun_Salario)
+        self.anoContrat = anoContrat
         gestores.append(self)
         funcionarios.append(self)
         
-    def calculaSalario(salario):
-        salarioTot = salario+(500*(2023-self.contra))
+    def calculaSalario(self, salario):
+        salarioTot = salario+(500*(2023-self.anoContrat))
         return salarioTot
         
         
@@ -44,13 +48,13 @@ class Gestor(Funcionario):
         self.contra = contratacao
         
 class Pedreiro(Funcionario):
-    def __init__(self, Fun_Nome, Fun_CPF, Fun_Fone, Fun_Cadastro, salarioTot):
-        super().__init__(Fun_Nome, Fun_CPF, Fun_Fone, Fun_Cadastro, salarioTot)        
+    def __init__(self, Fun_Nome, Fun_CPF, Fun_Fone, Fun_Cadastro, Fun_Salario):
+        super().__init__(Fun_Nome, Fun_CPF, Fun_Fone, Fun_Cadastro, Fun_Salario)        
         self.NumObras=0
         funcionarios.append(self)
         pedreiros.append(self)
         
-    def calculaSalario(salario):
+    def calculaSalario(self, salario):
         salarioTot = salario+(350*(self.NumObras))
         return salarioTot
         
