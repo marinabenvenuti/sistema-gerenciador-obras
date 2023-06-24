@@ -1,5 +1,6 @@
 from herança_pedreiro import Pedreiro
 salario_pedreiros = 1500 #melhorar essa variável, talvez pedir pra o usuario digitar quanto vai ganhar o pedreiro por obra
+    
 class Obra:
     def __init__(self, cod, cliente, materiaisusados, pedreiros, dataIn, dataFim, total):
         self.cod = cod
@@ -22,18 +23,14 @@ class Obra:
     def setCliente(self, cliente):
         self.cliente = cliente
         
-    def addMateriais(self, aux, materiais, materiaisusados):
-        for i in range(aux):
-            aux2 = str(input('Digite o nome do material necessário: '))
-            contador = 0
-            for material in materiais:
-                if material['nome'] == aux2:
-                    qtd = int(input('Digite a quantidade do material, utilizando apenas números: '))
-                    material['qtd'] = qtd
-                    materiaisusados.append(material)
-                    contador += 1
-            if contador<1:
-                aux2 = str(input('Material não encontrado! Digite o nome do material necessário novamente: ')) #aqui deve-se encontrar uma solução pra que o primeiro for continue tendo a quantidade dada pelo aux
+    def addMateriais(self):
+        
+        for i in range (len(self.materias)):
+            print("O material", self.materiais[i]['nome'], "possui", self.materiais[i]['qtd'], "itens")
+            add_num_mat=int(input("Quantos voce deseja adicionar? a medida é em {} com o valor de R${}".format(self.materiais[i]['medição'], self.materiais[i]['preço'])))
+            self.materiais[i]['qtd']+=add_num_mat
+            self.total+=(add_num_mat*self.materiais[i]['preço'])
+            
         return materiaisusados
                 
     def setMateriais(self, materiaisusados):
@@ -64,8 +61,3 @@ class Obra:
     
     def setTotal(self, totalObra):
         self.total = totalObra
-            
-        
-                    
-        
-        
