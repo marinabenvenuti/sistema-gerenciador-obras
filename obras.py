@@ -5,7 +5,13 @@ class Obra:
     def __init__(self, cod, cliente, materiaisusados, pedreiros, dataIn, dataFim, total):
         self.cod = cod
         self.cliente = cliente
-        self.materiais = materiaisusados
+        self.materiais = materiais
+        for i in range (len(self.materias)):
+            print("O material", self.materiais[i]['nome'], "possui", self.materiais[i]['qtd'], "itens")
+            add_num_mat=int(input("Quantos voce deseja adicionar? a medida é em {} com o valor de R${}".format(self.materiais[i]['medição'], self.materiais[i]['preço'])))
+            self.materiais[i]['qtd']+=add_num_mat
+            self.total+=(add_num_mat*self.materiais[i]['preço'])
+            
         self.pedreiros = pedreiros
         self.dataIn = dataIn
         self.dataFim = dataFim
