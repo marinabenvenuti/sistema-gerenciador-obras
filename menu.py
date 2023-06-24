@@ -86,7 +86,7 @@ def opcoesObras():
             cliente = str(input('Cliente: ')).title
             
             o = Obra('', '', '', '', '', '', '') # cria o objeto Obra
-            o.set_cod(random.randint(1, 10000))
+            o.set_cod(random.randint(10000, 100000))
             o.set_cliente(cliente)
             
             aux = int(input('Digite a quantidade de materiais que serão utilizados: '))
