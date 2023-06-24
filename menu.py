@@ -330,7 +330,7 @@ def opcoesFuncionarios():
                     print ('Cargo:', i.__class__.__name__)
                     print ('Cadastro:', i.cadastro)
                     print ('Nome:', i.nome)
-                    print ('Salario: R${}'.format(i.Sal_Calc))
+                    print ('Salario: R${}'.format(i.salarioTot))
                     print ('CPF: {}.{}.{}-{}'.format(i.cpf[0:3], i.cpf[3:6], i.cpf[6:9], i.cpf[9:11]))
                     print ('Contato: {}-{}'.format(i.fone[0:5], i.fone[5:9]))
 
@@ -349,7 +349,7 @@ def opcoesFuncionarios():
                     print ('Cargo:', i.__class__.__name__)
                     print ('Cadastro:', i.cadastro)
                     print ('Nome:', i.nome)
-                    print ('Salario: R${}'.format(i.Sal_Calc))
+                    print ('Salario: R${}'.format(i.salarioTot))
                     print ('CPF: {}.{}.{}-{}'.format(i.cpf[0:3], i.cpf[3:6], i.cpf[6:9], i.cpf[9:11]))
                     print ('Contato: {}-{}'.format(i.fone[0:5], i.fone[5:9]))
                     
@@ -369,13 +369,16 @@ def opcoesFuncionarios():
             Fun_CPF=input('CPF do funcionario[sem"." e "-"]: ')
             Fun_Fone=input('Telefone do Funcionario[Com "9" e sem DDD]: ')
             Fun_Cadastro=(random.randint(10000,100000))
-            Fun_Salario=1000
+            salario=1000
+            salarioTot = calculaSalario(salario)   
+            
             
             if Faz_Cad=='Gestor':
-                Gestor(Fun_Nome, Fun_CPF, Fun_Fone, Fun_Cadastro, Fun_Salario)
+                anoContrat = int(input('Digite o ano da contratação[AAAA]: '))
+                Gestor(Fun_Nome, Fun_CPF, Fun_Fone, Fun_Cadastro, salarioTot, contra)
 
             elif Faz_Cad=='Pedreiro':
-                Pedreiro(Fun_Nome, Fun_CPF, Fun_Fone, Fun_Cadastro, Fun_Salario)
+                Pedreiro(Fun_Nome, Fun_CPF, Fun_Fone, Fun_Cadastro, salarioTot)
                 
         if consultaFunc==4:
             #edição de funcionário
