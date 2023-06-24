@@ -5,9 +5,8 @@ from obras import *
 from funcionarios import *
 
 def printarObra(i):
-    contObras=1
     for i in obras:
-        print('  ')
+        print('  ')   
         print('ID:', i.cod)
         print ('Cliente: ', i.cliente)
         for j in range(len(i.materiais)):
@@ -54,34 +53,24 @@ def opcoesObras():
                     
         elif consultaObra==2:
             #pesquisa de obra específica
+            print('--------------------------------Pesquisar obra:--------------------------------')
             if len(obras)==0:
                 print('Nenhuma obra cadastrada')
-            else:
-                print('--------------------------------Pesquisar obra:--------------------------------')
-                print('1 - Pesquisar pelo ID')
-                print('2 - Pesquisar pelo nome do cliente')
-                consulta2 = int(input('Escolha a forma de consulta: '))
-                    
-                if consulta2 == 1: # Consultar pelo ID
-                    flag=False
-                    c = str(input('Digite o ID: '))
-                    for obr in obras:
-                        if c == func.get_cod():
-                            printarObra(obr)
-                            flag = True
-                        if flag == False:
-                            print("ID não cadastrado!")
-                            
-                                
-                elif consulta2 == 2: # Consultar pelo Nome
-                    c = str(input('Digite o nome do cliente: '))
-                    flag = False
-                    for obr in obras:
-                        if c == func.get_cod():
-                            printarObra(obr)
-                            flag = True
-                        if flag == False:
-                            print("Nome não cadastrado!")
+            else:  
+                cliente_pesquisa = input('Digite o nome do cliente da obra: ').title()
+                flag=False
+            
+                for i in obras:  # percorre a lista de obras
+                    if cliente_pesquisa == i.cliente: # busca pelo cliente da obra a ser alterado
+                        print('  ')   
+                        print('ID:', i.cod)
+                        print ('Cliente: ', i.cliente)
+                        for j in range(len(i.materiais)):
+                            print(i.materiais[j]['nome'], "em quantidade de", i.materiais[j]['qtd'], "(unidade de medida em {})".format(i.materiais[j]['medição']))
+                        print('Mestre de obra:', i.pedreiro)
+                        print('Data de início:', i.dataIn)
+                        print('Data de fim:', i.dataFim)
+                        print('Valor total: R${}'.format(i.total))
                             
         elif consultaObra==3:
             #cadastro de nova obra
@@ -176,47 +165,53 @@ def opcoesObras():
             
         elif consultaObra == 4:
             print('--------------------------------Editar obra:--------------------------------')
-            idO_pesquisa = str(input('Digite o ID da obra: '))
+            cliente_pesquisa = input('Digite o nome do cliente da obra: ').title()
             flag=False
-            for obra in obras:  # percorre a lista de obras
-                if idO_pesquisa == obra.get_cod():  # busca pelo ID da obra a ser alterado
-                    materiaisusados = []
+            
+            for i in obras:  # percorre a lista de obras
+                if cliente_pesquisa == i.cliente:  # busca pelo cliente da obra a ser alterado
                     print('Digite as novas informações de obra')
-                    cliente = str(input('Cliente: ')).title
-                    obra.set_cliente(cliente)
+                    cliente = input('Cliente: ').title
+                    obra.setCliente(cliente)
+            
+            for obra in obras:  # percorre a lista de obras
+                if cliente_pesquisa == obra.getCliente():  # busca pelo cliente da obra a ser alterado
+                    print('Digite as novas informações de obra')
+                    cliente = input('Cliente: ').title
+                    obra.setCliente(cliente)
                     
-                    aux = int(input('Digite a quantidade de materiais que serão utilizados: '))
-                    while aux>len(materiais)+1:
-                        aux = int(input('Valor inválido! Digite a quantidade de materiais que serão utilizados novamente: '))
-                    materiaisusados.append(addMateriais(aux, materiaisusados))
-                    obra.set_materiais(materiaisusados)
+                    for i in range (len(materiais)):
+                        print("O material", materiais[i]['nome'], "possui", materiais[i]['qtd'], "itens")
+                        add_num_mat=int(input("Quantos voce deseja adicionar? a medida é em {} com o valor de R${}: ".format(materiais[i]['medição'], materiais[i]['preço'])))
+                        materiais[i]['qtd']+=add_num_mat
+                        o.setMateriais(materiais)
                     
                     flagg = False
                     while True:
                         nomePedr = input('Digite o nome completo do mestre de obra: ').title
                         for pedreiro in pedreiros:
                             if nomePedr == pedreiro.nome:
-                                o.set_pedreiro(nomePedr)
+                                o.setPedreiro(nomePedr)
                                 flagg = True
                         if flagg==True:
                             break
                     
                     aux = str(input('Digite a data de início da obra no formado "DD/MM/AAAA": '))
-                    data_inicio = verificaData(aux)
+                    #data_inicio = verificaData(aux)
                     dataIn = datetime.strptime(data_inicio, '%d/%m/%Y')
-                    obra.set_dataIn(dataIn)
+                    obra.setDataIn(dataIn)
             
                     aux = str(input('Digite a data de fim da obra no formado "DD/MM/AAAA": '))
-                    data_fim = verificaData(aux)
+                    #data_fim = verificaData(aux)
                     dataFim = datetime.strptime(data_fim, '%d/%m/%Y')
-                    obra.set_dataFim(dataFim)
+                    obra.setDataFim(dataFim)
             
                     totalObra = calculaObra(pedreirosusados, materiaisusados) #arrumar
-                    obra.set_total(totalObra)
+                    obra.setTotal(totalObra)
                     
                     flag=True
                 if flag == False:
-                    print("ID não encontrado!")
+                    print("cliente não encontrado!")
                     
         elif consultaObra == 5:
             #exclusão de obra
