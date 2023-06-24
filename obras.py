@@ -13,8 +13,7 @@ class Obra:
         self.pedreiros = pedreiros
         self.dataIn = dataIn
         self.dataFim = dataFim
-        
-        
+            
     def getCod(self):
         return self.cod
     
@@ -40,28 +39,11 @@ class Obra:
     def setMateriais(self, materiaisusados):
         self.materiais = materiaisusados
         
-    def addPedreiros(self, aux, pedreiros, pedreirosusados):
-        for i in range(aux):
-            aux2 = str(input('Digite o cpf do pedreiro: ')) #pesquisa por cpf, depois adicionar mais opções de pesquisa
-            contador = 0
-            if aux2 == #continuar depois
-            
-    def setPedreiros(self, pedreirosusados):
-        self.pedreiros = pedreirosusados
-            
     def setDataIn(self, dataIn):
         self.dataIn = dataIn
             
     def setDataFim(self, dataFim):
         self.dataFim = dataFim
         
-    def calculaObra(pedreirosusados, materiaisusados):
-        total = (len(pedreirosusados)*salario_pedreiros)+0.05*salario_pedreiros
-        for i in range(len(materiaisusados)):
-            for material in materiaisusados:
-                total += material['qtd'] * material['preço']
-                
-        return total
-    
     def setTotal(self, totalObra):
         self.total = totalObra
