@@ -1,3 +1,6 @@
+import time
+from datetime import datetime
+import random
 from obras import *
 from funcionarios import *
 
@@ -18,8 +21,8 @@ def printarObra(i):
     
 
 def verConsul(x):
-    while not x in ["1","2", "3", "4", "5", "6"]:
-        x=input("Digite novamente o número da ação: ")
+    while not x in [1,2, 3, 4, 5, 6]:
+        x=int(input("Digite novamente o número da ação: "))
     return x
 
 def opcoesObras():
@@ -34,11 +37,11 @@ def opcoesObras():
         print("6) Voltar para o menu principal")
         print("  ")
             
-        consultaObra=input("Numero da ação a ser realizada: ")
-        consultaObra=verConsul(consulta)
+        consultaObra=int(input("Numero da ação a ser realizada: "))
+        consultaObra=verConsul(consultaObra)
         
         if consultaObra==1:
-            if obras==[]:
+            if len(obras)==0:
                 print('Nenhuma obra cadastrada')
             else:
                 print('--------------------------------Obras cadastradas:--------------------------------')
@@ -47,9 +50,9 @@ def opcoesObras():
                     ContObras+=1
                     printarObra(i)
                     
-        if consultaObra==2:
+        elif consultaObra==2:
             #pesquisa de obra específica
-            if obras==[]:
+            if len(obras)==0:
                 print('Nenhuma obra cadastrada')
             else:
                 print('--------------------------------Pesquisar obra:--------------------------------')
@@ -78,7 +81,7 @@ def opcoesObras():
                         if flag == False:
                             print("Nome não cadastrado!")
                             
-        if consultaObra==3:
+        elif consultaObra==3:
             #cadastro de nova obra
             materiais = []
 
@@ -129,40 +132,44 @@ def opcoesObras():
             cliente = str(input('Cliente: ')).title
             
             o = Obra('', '', '', '', '', '', '') # cria o objeto Obra
-            o.set_cod(random.randint(10000, 100000))
-            o.set_cliente(cliente)
+            cod = random.randint(10000, 100000)
+            o.setCod(cod)
+            o.setCliente(cliente)
             
-            o.set_materiais(materiaisusados)
-
+            for i in range (len(materiais)):
+                print("O material", materiais[i]['nome'], "possui", materiais[i]['qtd'], "itens")
+                add_num_mat=int(input("Quantos voce deseja adicionar? a medida é em {} com o valor de R${}: ".format(materiais[i]['medição'], materiais[i]['preço'])))
+                materiais[i]['qtd']+=add_num_mat
+                o.setMateriais(materiais)
 
 
             
             flag = False
             while True: #isso pode ser colocado numa função pois é usado na edição também
-                nomePedr = input('Digite o nome completo do mestre de obra: ').title
+                nomePedr = input('Digite o nome completo do mestre de obra: ')
                 for pedreiro in pedreiros:
                     if nomePedr == pedreiro.nome:
-                        o.set_pedreiro(nomePedr)
+                        o.setPedreiro(nomePedr)
                         flag = True
                 if flag==True:
                     break
             
             aux = str(input('Digite a data de início da obra no formado "DD/MM/AAAA": '))
-            data_inicio = verificaData(aux)
-            dataIn = datetime.strptime(data_inicio, '%d/%m/%Y')
-            o.set_dataIn(dataIn)
+            #data_inicio = verificaData(aux)
+            dataIn = datetime.strptime(aux, '%d/%m/%Y')
+            o.setDataIn(dataIn)
             
             aux = str(input('Digite a data de fim da obra no formado "DD/MM/AAAA": '))
-            data_fim = verificaData(aux)
-            dataFim = datetime.strptime(data_fim, '%d/%m/%Y')
-            o.set_dataFim(dataFim)
+            #data_fim = verificaData(aux)
+            dataFim = datetime.strptime(aux, '%d/%m/%Y')
+            o.setDataFim(dataFim)
             
-            totalObra = calculaObra(pedreirosusados, materiaisusados)
-            o.set_total(totalObra)
+            totalObra = calculaObra(materiais)
+            o.setTotal(totalObra)
             
             obras.append(o) #adicionando à lista de objetos obra
             
-        if consultaObra == 4:
+        elif consultaObra == 4:
             print('--------------------------------Editar obra:--------------------------------')
             idO_pesquisa = str(input('Digite o ID da obra: '))
             flag=False
@@ -206,7 +213,7 @@ def opcoesObras():
                 if flag == False:
                     print("ID não encontrado!")
                     
-        if consultaObra == 5:
+        elif consultaObra == 5:
             #exclusão de obra
             print('--------------------------------Excluir obra:--------------------------------')
             idO_pesquisa = str(input('Digite o ID da obra: '))
@@ -219,7 +226,7 @@ def opcoesObras():
             if flag == False:
                 print("Id não cadastrado!")
                 
-        if consultaObra == 6:
+        elif consultaObra == 6:
             break
         
         
@@ -235,8 +242,8 @@ def opcoesFuncionarios():
         print("6) Voltar para o menu principal")
         print("  ")
             
-        consultaFunc=input("Numero da ação a ser realizada: ")
-        consultaFunc=verConsul(consulta)
+        consultaFunc=int(input("Numero da ação a ser realizada: "))
+        consultaFunc=verConsul(consultaFunc)
         
         if consultaFunc==1:
             #exibir todos os funcionários da empresa
@@ -250,12 +257,12 @@ def opcoesFuncionarios():
                     print ('Cargo:', i.__class__.__name__)
                     print ('Cadastro:', i.cadastro)
                     print ('Nome:', i.nome)
-                    print ('Salario: R${}'.format(i.salarioTot))
+                    print ('Salario: R${}'.format(i.salario))
                     print ('CPF: {}.{}.{}-{}'.format(i.cpf[0:3], i.cpf[3:6], i.cpf[6:9], i.cpf[9:11]))
                     print ('Contato: {}-{}'.format(i.fone[0:5], i.fone[5:9]))
 
                     if i.__class__.__name__=='Gestor':
-                        print ('Data contrataçao:', i.contra)
+                        print ('Data contrataçao:', i.anoContrat)
                     if i.__class__.__name__=='Pedreiro':
                         print ('Presente em {} obras'.format(i.NumObras))
                         
@@ -282,23 +289,24 @@ def opcoesFuncionarios():
             #cadastro de novo funcionário
             print("[--------------------------------Cadastrar funcionário:--------------------------------]")
             print(' ')
-            Pes_Fun=input('Nome do funcionario a ser pesquisado: ').title()
 
             Faz_Cad=input('O que deseja cadastrar? ').title()   
             Fun_Nome=input('Nome do Funcionario: ').title()
             Fun_CPF=input('CPF do funcionario[sem"." e "-"]: ')
             Fun_Fone=input('Telefone do Funcionario[Com "9" e sem DDD]: ')
             Fun_Cadastro=(random.randint(10000,100000))
-            salario=1000
-            salarioTot = calculaSalario(salario)   
+            Fun_Salario =1500
+               
             
             
             if Faz_Cad=='Gestor':
                 anoContrat = int(input('Digite o ano da contratação[AAAA]: '))
-                Gestor(Fun_Nome, Fun_CPF, Fun_Fone, Fun_Cadastro, salarioTot, contra)
-
+                Gestor(Fun_Nome, Fun_CPF, Fun_Fone, Fun_Cadastro, Fun_Salario, anoContrat)
+                
+                
             elif Faz_Cad=='Pedreiro':
-                Pedreiro(Fun_Nome, Fun_CPF, Fun_Fone, Fun_Cadastro, salarioTot)
+                Pedreiro(Fun_Nome, Fun_CPF, Fun_Fone, Fun_Cadastro, Fun_Salario)
+                
                 
         if consultaFunc==4:
             #edição de funcionário
@@ -331,7 +339,7 @@ def opcoesFuncionarios():
                     print ('Cargo:', i.__class__.__name__)
                     print ('Cadastro:', i.cadastro)
                     print ('Nome:', i.nome)
-                    print ('Salario: R${}'.format(i.Sal_Calc))
+                    print ('Salario: R${}'.format(i.salario))
                     print ('CPF: {}.{}.{}-{}'.format(i.cpf[0:3], i.cpf[3:6], i.cpf[6:9], i.cpf[9:11]))
                     print ('Contato: {}-{}'.format(i.fone[0:5], i.fone[5:9]))
                     
@@ -342,8 +350,8 @@ def opcoesFuncionarios():
 
                     print('   ')
                     Del_Fun_F=input('Excluir este funcionario?').title()
-                    if Del_Fun_F=='sim':
-                        funcionarios.pop(i)
+                    if Del_Fun_F=='Sim':
+                        funcionarios.remove(i)
                         print('Funcionário deletado com sucesso')
                 else:
                     print('Funcionário não cadastrado')
@@ -368,11 +376,14 @@ def faturamento():
     print(f'O faturamento atual da empresa é de R${dinTotal}')
     
 def consultaMain(x):
-    while not x in ["1","2", "3", "4"]:
-        x=input("Digite novamente o número da ação: ")
+    while not x in [1,2, 3, 4]:
+        x=int(input("Digite novamente o número da ação: "))
     return x
 
 #main
+funcionarios.append(Pedreiro('Iago Munoz', '00000000000', '999999999', 12345, 1500))
+funcionarios.append(Gestor('Marina Benvenuti', '11111111111', '908888888', 23412, 1500, 2022))
+
 while True:
     print ("  ")
     print("[--------------------Sistema Gerenciador de Obras--------------------]")
@@ -384,17 +395,24 @@ while True:
     print("4) Encerrar programa")
     print("  ")
         
-    consulta=input("Numero da ação a ser realizada: ")
+    consulta=int(input("Numero da ação a ser realizada: "))
     consulta=consultaMain(consulta)
     
     if consulta == 1:
         opcoesObras()
             
     elif consulta == 2:
-        opcoesFunc()
+        opcoesFuncionarios()
         
     elif consulta == 3:
         faturamento()
     
     elif consulta == 4:
+        print("Programa encerrando...")
+        for i in range (2):
+            print("...")
+            time.sleep(1)
+            
+        print("Por: Marina Benvenuti e Iago Munoz")
+        print("Com agradecimentos a Alan Turing, ateu e homossexual, o pai da computação.")
         break
