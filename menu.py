@@ -239,7 +239,12 @@ def opcoesMateriais():
         
         if consultaMaterial==1:
             print("[--------------------------------Lista de Materiais--------------------------------]")
-            #fazer
+            print(' ')
+            for material in materiais:
+                print('Nome: ', material['nome'])
+                print('Medido por: ', material['medição'])
+                print('Preço: R$', material['preço'])
+                print(' ')  
             
         if consultaMaterial==2:
             print("[--------------------------------Pesquisar materiais--------------------------------]")
