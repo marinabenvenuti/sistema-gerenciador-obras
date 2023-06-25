@@ -15,6 +15,21 @@ def printarObra(i):
         print('Data de início:', i.dataIn)
         print('Data de fim:', i.dataFim)
         print('Valor total: R${}'.format(i.total))
+        print(' ')
+        time.sleep(2)
+        
+def semObra():
+    print(' ')
+    print('Nenhuma obra cadastrada')
+    print(' ')
+    time.sleep(1.5)
+    
+def semFuncionario():
+    print(' ')
+    print('Nenhum funcionário cadastrado')
+    print(' ')
+    time.sleep(1.5)
+    
     
     
 #def verificaData(aux):
@@ -45,7 +60,8 @@ def opcoesObras():
         
         if consultaObra==1:
             if len(obras)==0:
-                print('Nenhuma obra cadastrada')
+                semObra()
+                
             else:
                 print('--------------------------------Obras cadastradas:--------------------------------')
                 pn=0
@@ -55,13 +71,13 @@ def opcoesObras():
             #pesquisa de obra específica
             print('--------------------------------Pesquisar obra:--------------------------------')
             if len(obras)==0:
-                print('Nenhuma obra cadastrada')
+                semObra()
             else:  
                 cliente_pesquisa = input('Digite o nome do cliente da obra: ').title()
-                flag=False
-            
+                
+                
                 for i in obras:  # percorre a lista de obras
-                    if cliente_pesquisa == i.cliente: # busca pelo cliente da obra a ser alterado
+                    if cliente_pesquisa == i.cliente: 
                         print('  ')   
                         print('ID:', i.cod)
                         print ('Cliente: ', i.cliente)
@@ -71,6 +87,9 @@ def opcoesObras():
                         print('Data de início:', i.dataIn)
                         print('Data de fim:', i.dataFim)
                         print('Valor total: R${}'.format(i.total))
+                        print(' ')
+            
+                        time.sleep(2)
                             
         elif consultaObra==3:
             #cadastro de nova obra
@@ -165,66 +184,90 @@ def opcoesObras():
             
         elif consultaObra == 4:
             print('--------------------------------Editar obra:--------------------------------')
-            cliente_pesquisa = input('Digite o nome do cliente da obra: ').title()
-            flag=False
+            if obras==[]:
+                semObra()
             
-            for i in obras:  # percorre a lista de obras
-                if cliente_pesquisa == i.cliente:  # busca pelo cliente da obra a ser alterado
-                    print('Digite as novas informações de obra')
-                    cliente = input('Cliente: ').title
-                    obra.setCliente(cliente)
-            
-            for obra in obras:  # percorre a lista de obras
-                if cliente_pesquisa == obra.getCliente():  # busca pelo cliente da obra a ser alterado
-                    print('Digite as novas informações de obra')
-                    cliente = input('Cliente: ').title
-                    obra.setCliente(cliente)
-                    
-                    for i in range (len(materiais)):
-                        print("O material", materiais[i]['nome'], "possui", materiais[i]['qtd'], "itens")
-                        add_num_mat=int(input("Quantos voce deseja adicionar? a medida é em {} com o valor de R${}: ".format(materiais[i]['medição'], materiais[i]['preço'])))
-                        materiais[i]['qtd']+=add_num_mat
-                        o.setMateriais(materiais)
-                    
-                    flagg = False
-                    while True:
-                        nomePedr = input('Digite o nome completo do mestre de obra: ').title
-                        for pedreiro in pedreiros:
-                            if nomePedr == pedreiro.nome:
-                                o.setPedreiro(nomePedr)
-                                flagg = True
-                        if flagg==True:
-                            break
-                    
-                    aux = str(input('Digite a data de início da obra no formado "DD/MM/AAAA": '))
-                    #data_inicio = verificaData(aux)
-                    dataIn = datetime.strptime(data_inicio, '%d/%m/%Y')
-                    obra.setDataIn(dataIn)
-            
-                    aux = str(input('Digite a data de fim da obra no formado "DD/MM/AAAA": '))
-                    #data_fim = verificaData(aux)
-                    dataFim = datetime.strptime(data_fim, '%d/%m/%Y')
-                    obra.setDataFim(dataFim)
-            
-                    totalObra = calculaObra(pedreirosusados, materiaisusados) #arrumar
-                    obra.setTotal(totalObra)
-                    
-                    flag=True
-                if flag == False:
-                    print("cliente não encontrado!")
+            else:
+                cliente_pesquisa = input('Digite o nome do cliente da obra: ').title()
+                flag=False
+                
+                for i in obras:  # percorre a lista de obras
+                    if cliente_pesquisa == i.cliente:  # busca pelo cliente da obra a ser alterado
+                        print('Digite as novas informações de obra')
+                        cliente = input('Cliente: ').title
+                        obra.setCliente(cliente)
+                
+                for obra in obras:  # percorre a lista de obras
+                    if cliente_pesquisa == obra.getCliente():  # busca pelo cliente da obra a ser alterado
+                        print('Digite as novas informações de obra')
+                        cliente = input('Cliente: ').title
+                        obra.setCliente(cliente)
+                        
+                        for i in range (len(materiais)):
+                            print("O material", materiais[i]['nome'], "possui", materiais[i]['qtd'], "itens")
+                            add_num_mat=int(input("Quantos voce deseja adicionar? a medida é em {} com o valor de R${}: ".format(materiais[i]['medição'], materiais[i]['preço'])))
+                            materiais[i]['qtd']+=add_num_mat
+                            o.setMateriais(materiais)
+                        
+                        flagg = False
+                        while True:
+                            nomePedr = input('Digite o nome completo do mestre de obra: ').title
+                            for pedreiro in pedreiros:
+                                if nomePedr == pedreiro.nome:
+                                    o.setPedreiro(nomePedr)
+                                    flagg = True
+                            if flagg==True:
+                                break
+                        
+                        aux = str(input('Digite a data de início da obra no formado "DD/MM/AAAA": '))
+                        #data_inicio = verificaData(aux)
+                        dataIn = datetime.strptime(data_inicio, '%d/%m/%Y')
+                        obra.setDataIn(dataIn)
+                
+                        aux = str(input('Digite a data de fim da obra no formado "DD/MM/AAAA": '))
+                        #data_fim = verificaData(aux)
+                        dataFim = datetime.strptime(data_fim, '%d/%m/%Y')
+                        obra.setDataFim(dataFim)
+                
+                        totalObra = calculaObra(pedreirosusados, materiaisusados) #arrumar
+                        obra.setTotal(totalObra)
+                        
+                        flag=True
+                    if flag == False:
+                        print("cliente não encontrado!")
                     
         elif consultaObra == 5:
             #exclusão de obra
-            print('--------------------------------Excluir obra:--------------------------------')
-            idO_pesquisa = str(input('Digite o ID da obra: '))
-            
-            for i, j in enumerate(obras): # percorre a lista de obras
-                if idO_pesquisa == j.get_cod():
-                    obras.pop(i)
-                    print("Exclusão efetuada com sucesso!")
-                    flag=True
-            if flag == False:
-                print("Id não cadastrado!")
+            if obras==[]:
+                semObra()
+            else:
+                print('--------------------------------Excluir obra:--------------------------------')
+                print(' ')
+                cliente_pesquisa = input('Digite o nome do cliente da obra a ser excluída: ').title()
+                
+                flag=False
+                for i in obras:  # percorre a lista de obras
+                    if cliente_pesquisa == i.cliente: 
+                        print('  ')   
+                        print('ID:', i.cod)
+                        print ('Cliente: ', i.cliente)
+                        for j in range(len(i.materiais)):
+                            print(i.materiais[j]['nome'], "em quantidade de", i.materiais[j]['qtd'], "(unidade de medida em {})".format(i.materiais[j]['medição']))
+                        print('Mestre de obra:', i.pedreiro)
+                        print('Data de início:', i.dataIn)
+                        print('Data de fim:', i.dataFim)
+                        print('Valor total: R${}'.format(i.total))
+                        print(' ')
+                        flag=True
+                        Del_Fun_F=input('Excluir este funcionario? ').title()
+                        if Del_Fun_F=='Sim':
+                            obras.remove(i)
+                            print(' ')
+                            print('Obra deletada com sucesso')
+                            
+                if flag==False:
+                    print('Obra não cadastrada')
+                    
                 
         elif consultaObra == 6:
             break
@@ -248,7 +291,7 @@ def opcoesFuncionarios():
         if consultaFunc==1:
             #exibir todos os funcionários da empresa
             if funcionarios==[]:
-                print('Nenhum funcionário cadastrado')
+                semFuncionario()
             
             else:
                 print("[--------------------------------Funcionários cadastrados:--------------------------------]")
@@ -268,22 +311,26 @@ def opcoesFuncionarios():
                         
         if consultaFunc==2:
             #pesquisa de funcionário específico
-            print("[--------------------------------Pesquisar funcionário:--------------------------------]")
-            Pes_Fun=input('Nome do funcionario a ser pesquisado: ').title()
-            for i in funcionarios:
-                if i.nome==Pes_Fun:
-                    print ("   ")
-                    print ('Cargo:', i.__class__.__name__)
-                    print ('Cadastro:', i.cadastro)
-                    print ('Nome:', i.nome)
-                    print ('Salario: R${}'.format(i.salarioTot))
-                    print ('CPF: {}.{}.{}-{}'.format(i.cpf[0:3], i.cpf[3:6], i.cpf[6:9], i.cpf[9:11]))
-                    print ('Contato: {}-{}'.format(i.fone[0:5], i.fone[5:9]))
-                    
-                    if i.__class__.__name__=='Gestor':
-                        print ('Data contrataçao:', i.contra)
-                    if i.__class__.__name__=='Pedreiro':
-                        print ('Presente em {} obras'.format(i.NumObras))
+            if funcionarios==[]:
+                semFuncionario()
+                
+            else:
+                print("[--------------------------------Pesquisar funcionário:--------------------------------]")
+                Pes_Fun=input('Nome do funcionario a ser pesquisado: ').title()
+                for i in funcionarios:
+                    if i.nome==Pes_Fun:
+                        print ("   ")
+                        print ('Cargo:', i.__class__.__name__)
+                        print ('Cadastro:', i.cadastro)
+                        print ('Nome:', i.nome)
+                        print ('Salario: R${}'.format(i.salarioTot))
+                        print ('CPF: {}.{}.{}-{}'.format(i.cpf[0:3], i.cpf[3:6], i.cpf[6:9], i.cpf[9:11]))
+                        print ('Contato: {}-{}'.format(i.fone[0:5], i.fone[5:9]))
+                        
+                        if i.__class__.__name__=='Gestor':
+                            print ('Data contrataçao:', i.contra)
+                        if i.__class__.__name__=='Pedreiro':
+                            print ('Presente em {} obras'.format(i.NumObras))
                         
         if consultaFunc==3:
             #cadastro de novo funcionário
@@ -310,50 +357,61 @@ def opcoesFuncionarios():
                 
         if consultaFunc==4:
             #edição de funcionário
-            print("[--------------------------------Editar funcionário:--------------------------------]")
-            print(' ')
-            editFunc = input('Digite o nome completo do funcionário a ser editado: ')
-            for i in funcionarios:
-                if i.nome == editFunc:
-                    nome = input('Digite o novo nome do funcionário: ')
-                    i.setNome(nome)
-                    
-                    cpf = input('Digite o novo cpf do funcionário: ')
-                    i.setCpf(cpf)
-                    
-                    fone = input('Digite o novo telefone do funcionário: ')
-                    i.setFone(fone)
-                    
-                    if i.__class__.__name__=='Gestor':
-                        contratacao = int(input('Digite o novo ano de contratação do funcionário: '))
-                        i.setContra(contratacao)
+            if funcionarios==[]:
+                semFuncionario()
+            
+            else:
+                print("[--------------------------------Editar funcionário:--------------------------------]")
+                print(' ')
+                editFunc = input('Digite o nome completo do funcionário a ser editado: ')
+                for i in funcionarios:
+                    if i.nome == editFunc:
+                        nome = input('Digite o novo nome do funcionário: ')
+                        i.setNome(nome)
+                        
+                        cpf = input('Digite o novo cpf do funcionário: ')
+                        i.setCpf(cpf)
+                        
+                        fone = input('Digite o novo telefone do funcionário: ')
+                        i.setFone(fone)
+                        
+                        if i.__class__.__name__=='Gestor':
+                            contratacao = int(input('Digite o novo ano de contratação do funcionário: '))
+                            i.setContra(contratacao)
                         
         if consultaFunc==5:
             #exclusão de funcionário
-            print("[--------------------------------Excluir funcionário:--------------------------------]")
-            print('   ')
-            Del_Fun=input('Digite o nome completo do funcionario a ser excluido: ').title()
-            for i in funcionarios:
-                if i.nome==Del_Fun:
-                    print ("   ")
-                    print ('Cargo:', i.__class__.__name__)
-                    print ('Cadastro:', i.cadastro)
-                    print ('Nome:', i.nome)
-                    print ('Salario: R${}'.format(i.salario))
-                    print ('CPF: {}.{}.{}-{}'.format(i.cpf[0:3], i.cpf[3:6], i.cpf[6:9], i.cpf[9:11]))
-                    print ('Contato: {}-{}'.format(i.fone[0:5], i.fone[5:9]))
-                    
-                    if i.__class__.__name__=='Gestor':
-                        print ('Data contrataçao:', i.contra)
-                    if i.__class__.__name__=='Pedreiro':
-                        print ('Presente em {} obras'.format(i.NumObras))
-
-                    print('   ')
-                    Del_Fun_F=input('Excluir este funcionario?').title()
-                    if Del_Fun_F=='Sim':
-                        funcionarios.remove(i)
-                        print('Funcionário deletado com sucesso')
-                else:
+            if funcionarios==[]:
+                semFuncionario()
+                
+            else:
+                print("[--------------------------------Excluir funcionário:--------------------------------]")
+                print('   ')
+                flag=False
+                Del_Fun=input('Digite o nome completo do funcionario a ser excluido: ').title()
+                for i in funcionarios:
+                    if i.nome==Del_Fun:
+                        print ("   ")
+                        print ('Cargo:', i.__class__.__name__)
+                        print ('Cadastro:', i.cadastro)
+                        print ('Nome:', i.nome)
+                        print ('Salario: R${}'.format(i.salario))
+                        print ('CPF: {}.{}.{}-{}'.format(i.cpf[0:3], i.cpf[3:6], i.cpf[6:9], i.cpf[9:11]))
+                        print ('Contato: {}-{}'.format(i.fone[0:5], i.fone[5:9]))
+                        
+                        if i.__class__.__name__=='Gestor':
+                            print ('Data contrataçao:', i.contra)
+                        if i.__class__.__name__=='Pedreiro':
+                            print ('Presente em {} obras'.format(i.NumObras))
+                        Flag=True
+                        print('   ')
+                        Del_Fun_F=input('Excluir este funcionario?').title()
+                        if Del_Fun_F=='Sim':
+                            funcionarios.remove(i)
+                            print(' ')
+                            print('Funcionário deletado com sucesso')
+                            
+                if flag==False:
                     print('Funcionário não cadastrado')
                     
         if consultaFunc==6:
@@ -383,6 +441,7 @@ def consultaMain(x):
 #main
 funcionarios.append(Pedreiro('Iago Munoz', '00000000000', '999999999', 12345, 1500))
 funcionarios.append(Gestor('Marina Benvenuti', '11111111111', '908888888', 23412, 1500, 2022))
+obras.append(Obra(12349, 'José Silva', [{'nome': 'areia', 'medição': 'm³', 'qtd': 3, 'preço': 170.0}, {'nome': 'cal', 'medição': 'kg', 'qtd': 5, 'preço': 13.0}, {'nome': 'brita', 'medição': 'm³', 'qtd': 8, 'preço': 96.0}, {'nome': 'cimento', 'medição': 'kg', 'qtd': 3, 'preço': 30.0}, {'nome': 'telha de aço', 'medição': 'm²', 'qtd': 6, 'preço': 20.0}, {'nome': 'vergalhão', 'medição': 'm', 'qtd': 1, 'preço': 16.0}], 427.00, 'Iago Munoz', '30/07/2004', '12/11/2022')) 
 
 while True:
     print ("  ")
