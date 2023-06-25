@@ -204,24 +204,33 @@ def opcoesObras():
                                 i.setCliente(cliente)
                                 
                             if editaObra==2:
-                                for x in range (len(materiais)):
-                                    print("O material", materiais[i]['nome'], "possui", materiais[i]['qtd'], "itens")
-                                    aux = input('Você deseja adicionar ou retirar? [A/R] ').title()
-                                    if aux=='A':
-                                        add_num_mat=int(input("Quantos voce deseja adicionar? a medida é em {} com o valor de R${}: ".format(materiais[i]['medição'], materiais[i]['preço'])))
-                                        print(' ')
-                                        materiais[i]['qtd']+=add_num_mat
-                                        i.setMateriais(materiais)
-                                        
-                                    if aux=='R':
-                                        rtr_num_mat=int(input("Quantos voce deseja adicionar? a medida é em {} com o valor de R${}: ".format(materiais[i]['medição'], materiais[i]['preço'])))
-                                        print(' ')
-                                        materiais[i]['qtd']-=rtr_num_mat
-                                        i.setMateriais(materiais)
-                                totalObra = 350*1.22
-                                for i in materiais:
-                                    totalObra += material['qtd'] * material['preço']
-                                i.setTotal(totalObra)
+                                print("Voce deseja:")
+                                print("1)Adicionar materiais")
+                                print("2)Remover materiais")
+                                print("  ")
+                                Fazercoisa=int(input("O que você deseja fazer?: "))
+                                
+                                if Fazercoisa==1:
+                                    for j in range(6):
+                                        print("O material", i.materiais[j]['nome'], "possui", i.materiais[j]['qtd'], "itens")
+                                        add_num_mat=int(input("Quantos voce deseja adicionar? a medida é em {} com o valor de R${}: ".format(i.materiais[j]['medição'], i.materiais[j]['preço'])))
+                                        i.materiais[j]['qtd']+=add_num_mat
+                                    totalObra = 350*1.22
+                                    for x in range(6):
+                                        totalObra+= i.materiais[x]['qtd'] * i.materiais[x]['preço']
+                                    i.setTotal(totalObra)
+                                    
+                                elif Fazercoisa==2:
+                                    for j in range(6):
+                                        print("O material", i.materiais[j]['nome'], "possui", i.materiais[j]['qtd'], "itens")
+                                        rem_num_mat=int(input("Quantos foram utilizados?: "))
+                                        while rem_num_mat>i.materiais[j]['qtd']:
+                                            rem_num_mat=int(input("Digite novamente quantos foram utilizados?: "))
+                                        i.materiais[j]['qtd']-=rem_num_mat
+                                    
+                                   
+                                
+                                
                                 
                             if editaObra==3:
                                 flagg = False
@@ -452,7 +461,7 @@ def consultaMain(x):
 #main
 funcionarios.append(Pedreiro('Iago Munoz', '00000000000', '999999999', 12345, 1500))
 funcionarios.append(Gestor('Marina Benvenuti', '11111111111', '908888888', 23412, 1500, 2022))
-obras.append(Obra(12349, 'José Silva', [{'nome': 'areia', 'medição': 'm³', 'qtd': 3, 'preço': 170.0}, {'nome': 'cal', 'medição': 'kg', 'qtd': 5, 'preço': 13.0}, {'nome': 'brita', 'medição': 'm³', 'qtd': 8, 'preço': 96.0}, {'nome': 'cimento', 'medição': 'kg', 'qtd': 3, 'preço': 30.0}, {'nome': 'telha de aço', 'medição': 'm²', 'qtd': 6, 'preço': 20.0}, {'nome': 'vergalhão', 'medição': 'm', 'qtd': 1, 'preço': 16.0}], 427.00, 'Iago Munoz', '30/07/2004', '12/11/2022')) 
+obras.append(Obra(12349, 'Jose', [{'nome': 'areia', 'medição': 'm³', 'qtd': 3, 'preço': 170.0}, {'nome': 'cal', 'medição': 'kg', 'qtd': 5, 'preço': 13.0}, {'nome': 'brita', 'medição': 'm³', 'qtd': 8, 'preço': 96.0}, {'nome': 'cimento', 'medição': 'kg', 'qtd': 3, 'preço': 30.0}, {'nome': 'telha de aço', 'medição': 'm²', 'qtd': 6, 'preço': 20.0}, {'nome': 'vergalhão', 'medição': 'm', 'qtd': 1, 'preço': 16.0}], 427.00, 'Iago Munoz', '30/07/2004', '12/11/2022')) 
 
 while True:
     print ("  ")
@@ -486,4 +495,3 @@ while True:
         print("Por: Marina Benvenuti e Iago Munoz")
         print("Com agradecimentos a Alan Turing, ateu e homossexual, o pai da computação.")
         break
-
