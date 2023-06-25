@@ -10,7 +10,6 @@ class Obra:
         self.pedreiro = nomePedr
         self.dataIn = dataIn
         self.dataFim = dataFim
-        obras.append(self)
         
         
     def getCod(self):
