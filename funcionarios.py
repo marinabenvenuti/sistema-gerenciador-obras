@@ -1,6 +1,8 @@
-funcionarios = []
+
+funcionarios= []
 pedreiros = []
 gestores = []
+
 
 
 class Funcionario:
@@ -39,6 +41,9 @@ class Gestor(Funcionario):
         gestores.append(self)
         funcionarios.append(self)
         
+    def setContra(self, contratacao):
+        self.anoContrat = contratacao
+        
     def calculaSalario(self, salario):
         salarioTot = salario+(500*(2023-self.anoContrat))
         return salarioTot
@@ -48,13 +53,18 @@ class Gestor(Funcionario):
         self.contra = contratacao
         
 class Pedreiro(Funcionario):
-    def __init__(self, Fun_Nome, Fun_CPF, Fun_Fone, Fun_Cadastro, Fun_Salario):
+    def __init__(self, Fun_Nome, Fun_CPF, Fun_Fone, Fun_Cadastro, Fun_Salario, numObras):
         super().__init__(Fun_Nome, Fun_CPF, Fun_Fone, Fun_Cadastro, Fun_Salario)        
-        self.NumObras=0
+        self.numObras= numObras
         funcionarios.append(self)
         pedreiros.append(self)
         
     def calculaSalario(self, salario):
         salarioTot = salario+(350*(self.NumObras))
         return salarioTot
+    
+    def setNumObras(self):
+        self.numObras += 1
+        
+        
         
