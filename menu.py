@@ -220,7 +220,7 @@ def opcoesObras():
                             print("Data de inicio não alterada")
                         print ("   ")
                         
-                       AuxAlterar=""
+                        AuxAlterar=""
                         AuxAlterar=input('Digite a nova data de final da obra no formado "DD/MM/AAAA": ')
                         if len(AuxAlterar)!=0:
                             AuxAlterar = datetime.strptime(data_inicio, '%d/%m/%Y')
