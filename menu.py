@@ -16,7 +16,7 @@ def printarObra(i):
         print('Data de fim:', i.dataFim)
         print('Valor total: R${}'.format(i.total))
         print(' ')
-        time.sleep(2)
+        time.sleep(1)
         
 def semObra():
     print(' ')
@@ -75,21 +75,14 @@ def opcoesObras():
             else:  
                 cliente_pesquisa = input('Digite o nome do cliente da obra: ').title()
                 
-                
+                flag=False
                 for i in obras:  # percorre a lista de obras
                     if cliente_pesquisa == i.cliente: 
-                        print('  ')   
-                        print('ID:', i.cod)
-                        print ('Cliente: ', i.cliente)
-                        for j in range(len(i.materiais)):
-                            print(i.materiais[j]['nome'], "em quantidade de", i.materiais[j]['qtd'], "(unidade de medida em {})".format(i.materiais[j]['medição']))
-                        print('Mestre de obra:', i.pedreiro)
-                        print('Data de início:', i.dataIn)
-                        print('Data de fim:', i.dataFim)
-                        print('Valor total: R${}'.format(i.total))
-                        print(' ')
-            
-                        time.sleep(2)
+                        printarObra(i)
+                        flag=True
+                        
+                if flag==False:
+                    print('Obra não cadastrada')
                             
         elif consultaObra==3:
             #cadastro de nova obra
@@ -188,49 +181,80 @@ def opcoesObras():
                 semObra()
             
             else:
-                cliente_pesquisa = input('Digite o nome do cliente da obra: ').title()
+                cliente_pesquisa = input('Digite o nome do cliente da obra a ser editada: ').title()
+                print(' ')
                 flag=False
                 
                 for i in obras:  # percorre a lista de obras
                     if cliente_pesquisa == i.cliente:  # busca pelo cliente da obra a ser alterado
-                        print("ATENÇÃO: Caso não deseje alterar a informação apenas de enter sem digitar nada")
+                        while True:
+                            print("  ")
+                            print("1) Editar cliente")
+                            print("2) Editar materiais")
+                            print("3) Editar mestre de obra")
+                            print("4) Editar data de início")
+                            print("5) Editar data de fim")
+                            print("6) Voltar para o menu de obras")
+                            print("  ")
+                            editaObra=int(input("Numero da ação a ser realizada: "))
+                            consultaObra=verConsul(editaObra)
+                            
+                            if editaObra==1:
+                                cliente = input('Novo cliente: ').title()
+                                i.setCliente(cliente)
+                                
+                            if editaObra==2:
+                                for x in range (len(materiais)):
+                                    print("O material", materiais[i]['nome'], "possui", materiais[i]['qtd'], "itens")
+                                    aux = input('Você deseja adicionar ou retirar? [A/R] ').title()
+                                    if aux=='A':
+                                        add_num_mat=int(input("Quantos voce deseja adicionar? a medida é em {} com o valor de R${}: ".format(materiais[i]['medição'], materiais[i]['preço'])))
+                                        print(' ')
+                                        materiais[i]['qtd']+=add_num_mat
+                                        i.setMateriais(materiais)
+                                        
+                                    if aux=='R':
+                                        rtr_num_mat=int(input("Quantos voce deseja adicionar? a medida é em {} com o valor de R${}: ".format(materiais[i]['medição'], materiais[i]['preço'])))
+                                        print(' ')
+                                        materiais[i]['qtd']-=rtr_num_mat
+                                        i.setMateriais(materiais)
+                                totalObra = 350*1.22
+                                for i in materiais:
+                                    totalObra += material['qtd'] * material['preço']
+                                i.setTotal(totalObra)
+                                
+                            if editaObra==3:
+                                flagg = False
+                                while True:
+                                    nomePedr = input('Digite o nome completo do novo mestre de obra: ').title
+                                    print(' ')
+                                    for pedreiro in pedreiros:
+                                        if nomePedr == pedreiro.nome:
+                                            i.setPedreiro(nomePedr)
+                                            flagg = True
+                                    if flagg==True:
+                                        break
+                                    
+                            if editaObra==4:
+                                aux = str(input('Digite a nova data de início da obra no formado "DD/MM/AAAA": '))
+                                print(' ')
+                                #data_inicio = verificaData(aux)
+                                dataIn = datetime.strptime(data_inicio, '%d/%m/%Y')
+                                i.setDataIn(dataIn)
+                                
+                            if editaObra==5:
+                                aux = str(input('Digite a nova data de fim da obra no formado "DD/MM/AAAA": '))
+                                print(' ')
+                                #data_fim = verificaData(aux)
+                                dataFim = datetime.strptime(data_fim, '%d/%m/%Y')
+                                i.setDataFim(dataFim)
+                                
+                            if editaObra==6:
+                                break
                         
-                        AuxAlterar=""
-                        AuxAlterar=input("Novo nome do Cliente: ").title
-                        if len(AuxAlterar)!=0:
-                            i.setCliente(AuxAlterar)
-                        else:
-                            print("Cliente não alterado")
-                        print ("   ")
-                        
-                        AuxAlterar=""
-                        AuxAlterar=input("Novo nome do mestre de obras: ").title
-                        if len(AuxAlterar)!=0:
-                            i.setPedreiro(AuxAlterar)
-                        else:
-                            print("Mestre de obras não alterado")
-                        print ("   ")
-                        
-                        AuxAlterar=""
-                        AuxAlterar=input('Digite a nova data de início da obra no formado "DD/MM/AAAA": ')
-                        if len(AuxAlterar)!=0:
-                            AuxAlterar = datetime.strptime(data_inicio, '%d/%m/%Y')
-                            i.setDataIn(AuxAlterar)
-                        else:
-                            print("Data de inicio não alterada")
-                        print ("   ")
-                        
-                        AuxAlterar=""
-                        AuxAlterar=input('Digite a nova data de final da obra no formado "DD/MM/AAAA": ')
-                        if len(AuxAlterar)!=0:
-                            AuxAlterar = datetime.strptime(data_inicio, '%d/%m/%Y')
-                            i.setDataFim(AuxAlterar)
-                        else:
-                            print("Data final não alterada")
-                        print ("   ")
-    
-                    if flag == False:
-                        print("cliente não encontrado!")
+                        flag=True
+                if flag == False:
+                    print("Cliente não encontrado!")
                     
         elif consultaObra == 5:
             #exclusão de obra
@@ -244,19 +268,10 @@ def opcoesObras():
                 flag=False
                 for i in obras:  # percorre a lista de obras
                     if cliente_pesquisa == i.cliente: 
-                        print('  ')   
-                        print('ID:', i.cod)
-                        print ('Cliente: ', i.cliente)
-                        for j in range(len(i.materiais)):
-                            print(i.materiais[j]['nome'], "em quantidade de", i.materiais[j]['qtd'], "(unidade de medida em {})".format(i.materiais[j]['medição']))
-                        print('Mestre de obra:', i.pedreiro)
-                        print('Data de início:', i.dataIn)
-                        print('Data de fim:', i.dataFim)
-                        print('Valor total: R${}'.format(i.total))
-                        print(' ')
+                        printarObra(i)
                         flag=True
-                        Del_Fun_F=input('Excluir este funcionario? ').title()
-                        if Del_Fun_F=='Sim':
+                        Del_Fun_F=input('Excluir esta obra? [S/N] ').title()
+                        if Del_Fun_F=='S':
                             obras.remove(i)
                             print(' ')
                             print('Obra deletada com sucesso')
@@ -471,3 +486,4 @@ while True:
         print("Por: Marina Benvenuti e Iago Munoz")
         print("Com agradecimentos a Alan Turing, ateu e homossexual, o pai da computação.")
         break
+
