@@ -193,46 +193,42 @@ def opcoesObras():
                 
                 for i in obras:  # percorre a lista de obras
                     if cliente_pesquisa == i.cliente:  # busca pelo cliente da obra a ser alterado
-                        print('Digite as novas informações de obra')
-                        cliente = input('Cliente: ').title
-                        obra.setCliente(cliente)
-                
-                for obra in obras:  # percorre a lista de obras
-                    if cliente_pesquisa == obra.getCliente():  # busca pelo cliente da obra a ser alterado
-                        print('Digite as novas informações de obra')
-                        cliente = input('Cliente: ').title
-                        obra.setCliente(cliente)
+                        print("ATENÇÃO: Caso não deseje alterar a informação apenas de enter sem digitar nada")
                         
-                        for i in range (len(materiais)):
-                            print("O material", materiais[i]['nome'], "possui", materiais[i]['qtd'], "itens")
-                            add_num_mat=int(input("Quantos voce deseja adicionar? a medida é em {} com o valor de R${}: ".format(materiais[i]['medição'], materiais[i]['preço'])))
-                            materiais[i]['qtd']+=add_num_mat
-                            o.setMateriais(materiais)
+                        AuxAlterar=""
+                        AuxAlterar=input("Novo nome do Cliente: ").title
+                        if len(AuxAlterar)!=0:
+                            i.setCliente(AuxAlterar)
+                        else:
+                            print("Cliente não alterado")
+                        print ("   ")
                         
-                        flagg = False
-                        while True:
-                            nomePedr = input('Digite o nome completo do mestre de obra: ').title
-                            for pedreiro in pedreiros:
-                                if nomePedr == pedreiro.nome:
-                                    o.setPedreiro(nomePedr)
-                                    flagg = True
-                            if flagg==True:
-                                break
+                        AuxAlterar=""
+                        AuxAlterar=input("Novo nome do mestre de obras: ").title
+                        if len(AuxAlterar)!=0:
+                            i.setPedreiro(AuxAlterar)
+                        else:
+                            print("Mestre de obras não alterado")
+                        print ("   ")
                         
-                        aux = str(input('Digite a data de início da obra no formado "DD/MM/AAAA": '))
-                        #data_inicio = verificaData(aux)
-                        dataIn = datetime.strptime(data_inicio, '%d/%m/%Y')
-                        obra.setDataIn(dataIn)
-                
-                        aux = str(input('Digite a data de fim da obra no formado "DD/MM/AAAA": '))
-                        #data_fim = verificaData(aux)
-                        dataFim = datetime.strptime(data_fim, '%d/%m/%Y')
-                        obra.setDataFim(dataFim)
-                
-                        totalObra = calculaObra(pedreirosusados, materiaisusados) #arrumar
-                        obra.setTotal(totalObra)
+                        AuxAlterar=""
+                        AuxAlterar=input('Digite a nova data de início da obra no formado "DD/MM/AAAA": ')
+                        if len(AuxAlterar)!=0:
+                            AuxAlterar = datetime.strptime(data_inicio, '%d/%m/%Y')
+                            i.setDataIn(AuxAlterar)
+                        else:
+                            print("Data de inicio não alterada")
+                        print ("   ")
                         
-                        flag=True
+                       AuxAlterar=""
+                        AuxAlterar=input('Digite a nova data de final da obra no formado "DD/MM/AAAA": ')
+                        if len(AuxAlterar)!=0:
+                            AuxAlterar = datetime.strptime(data_inicio, '%d/%m/%Y')
+                            i.setDataFim(AuxAlterar)
+                        else:
+                            print("Data final não alterada")
+                        print ("   ")
+    
                     if flag == False:
                         print("cliente não encontrado!")
                     
