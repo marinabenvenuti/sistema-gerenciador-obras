@@ -153,6 +153,7 @@ def opcoesObras():
                 for pedreiro in pedreiros:
                     if nomePedr == pedreiro.nome:
                         o.setPedreiro(nomePedr)
+                        setNumObras(pedreiro)
                         flag = True
                 if flag==True:
                     break
@@ -235,10 +236,10 @@ def opcoesObras():
                             if editaObra==3:
                                 flagg = False
                                 while True:
-                                    nomePedr = input('Digite o nome completo do novo mestre de obra: ').title
+                                    nomePedr = input('Digite o nome completo do novo mestre de obra: ').title()
                                     print(' ')
-                                    for pedreiro in pedreiros:
-                                        if nomePedr == pedreiro.nome:
+                                    for y in pedreiros:
+                                        if nomePedr == y.nome:
                                             i.setPedreiro(nomePedr)
                                             flagg = True
                                     if flagg==True:
@@ -248,14 +249,14 @@ def opcoesObras():
                                 aux = str(input('Digite a nova data de início da obra no formado "DD/MM/AAAA": '))
                                 print(' ')
                                 #data_inicio = verificaData(aux)
-                                dataIn = datetime.strptime(data_inicio, '%d/%m/%Y')
+                                dataIn = datetime.strptime(aux, '%d/%m/%Y')
                                 i.setDataIn(dataIn)
                                 
                             if editaObra==5:
                                 aux = str(input('Digite a nova data de fim da obra no formado "DD/MM/AAAA": '))
                                 print(' ')
                                 #data_fim = verificaData(aux)
-                                dataFim = datetime.strptime(data_fim, '%d/%m/%Y')
+                                dataFim = datetime.strptime(aux, '%d/%m/%Y')
                                 i.setDataFim(dataFim)
                                 
                             if editaObra==6:
@@ -327,7 +328,7 @@ def opcoesFuncionarios():
                     if i.__class__.__name__=='Gestor':
                         print ('Data contrataçao:', i.anoContrat)
                     if i.__class__.__name__=='Pedreiro':
-                        print ('Presente em {} obras'.format(i.NumObras))
+                        print ('Presente em {} obras'.format(i.numObras))
                         
         if consultaFunc==2:
             #pesquisa de funcionário específico
@@ -343,7 +344,7 @@ def opcoesFuncionarios():
                         print ('Cargo:', i.__class__.__name__)
                         print ('Cadastro:', i.cadastro)
                         print ('Nome:', i.nome)
-                        print ('Salario: R${}'.format(i.salarioTot))
+                        print ('Salario: R${}'.format(i.salario))
                         print ('CPF: {}.{}.{}-{}'.format(i.cpf[0:3], i.cpf[3:6], i.cpf[6:9], i.cpf[9:11]))
                         print ('Contato: {}-{}'.format(i.fone[0:5], i.fone[5:9]))
                         
@@ -372,7 +373,8 @@ def opcoesFuncionarios():
                 
                 
             elif Faz_Cad=='Pedreiro':
-                Pedreiro(Fun_Nome, Fun_CPF, Fun_Fone, Fun_Cadastro, Fun_Salario)
+                numObras = int(input('Digite o número de obras: '))
+                Pedreiro(Fun_Nome, Fun_CPF, Fun_Fone, Fun_Cadastro, Fun_Salario, numObras)
                 
                 
         if consultaFunc==4:
@@ -459,8 +461,9 @@ def consultaMain(x):
     return x
 
 #main
-funcionarios.append(Pedreiro('Iago Munoz', '00000000000', '999999999', 12345, 1500))
-funcionarios.append(Gestor('Marina Benvenuti', '11111111111', '908888888', 23412, 1500, 2022))
+pedreiros.append(Pedreiro('Igor', '00000005252', '999934599', 16745, 1500, 1))
+pedreiros.append(Pedreiro('Iago', '00000000000', '999999999', 12345, 1500, 0))
+gestores.append(Gestor('Marina Benvenuti', '11111111111', '908888888', 23412, 1500, 2022))
 obras.append(Obra(12349, 'Jose', [{'nome': 'areia', 'medição': 'm³', 'qtd': 3, 'preço': 170.0}, {'nome': 'cal', 'medição': 'kg', 'qtd': 5, 'preço': 13.0}, {'nome': 'brita', 'medição': 'm³', 'qtd': 8, 'preço': 96.0}, {'nome': 'cimento', 'medição': 'kg', 'qtd': 3, 'preço': 30.0}, {'nome': 'telha de aço', 'medição': 'm²', 'qtd': 6, 'preço': 20.0}, {'nome': 'vergalhão', 'medição': 'm', 'qtd': 1, 'preço': 16.0}], 427.00, 'Iago Munoz', '30/07/2004', '12/11/2022')) 
 
 while True:
