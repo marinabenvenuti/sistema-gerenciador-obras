@@ -39,6 +39,11 @@ def verificaAno(anoContrat):
     while anoContrat<1990: #supomos que a empresa foi criada em 1990
         anoContrat = int(input('Valor inválido! Digite o ano da contratação[AAAA]: '))
     return anoContrat
+
+def verificaSN(x):
+    while x!='S' and x!='N':
+        x = input('Inválido! Digite S para sim e N para não')
+    return x
     
 #def verificaData(aux):
  #   verif = 0
@@ -49,6 +54,11 @@ def verificaAno(anoContrat):
 def verConsul(x):
     while not x in [1,2, 3, 4, 5, 6]:
         x=int(input("Digite novamente o número da ação: "))
+    return x
+
+def consultaMain(x):
+    while not x in [1, 2, 3, 4]:
+        x=int(input("Digite novamente o número da ação: ")).title()
     return x
 
 def opcoesObras():
@@ -62,13 +72,7 @@ def opcoesObras():
         print("5) Excluir obra")
         print("6) Voltar para o menu principal")
         print("  ")
-        
-    
-        
-                        
-                        
-                    
-            
+   
         consultaObra=int(input("Numero da ação a ser realizada: "))
         consultaObra=verConsul(consultaObra)
         
@@ -316,6 +320,7 @@ def opcoesObras():
                         printarObra(i)
                         flag=True
                         Del_Fun_F=input('Excluir esta obra? [S/N] ').title()
+                        Del_Fun_F = verificaSN(Del_Fun_F)
                         if Del_Fun_F=='S':
                             for porra in obras: 
                                 for vsf in pedreiros:
@@ -394,7 +399,7 @@ def opcoesFuncionarios():
                         print ('Contato: {}-{}'.format(i.fone[0:5], i.fone[5:9]))
                         
                         if i.__class__.__name__=='Gestor':
-                            print ('Data contrataçao:', i.contra)
+                            print ('Data contrataçao:', i.anoContrat)
                         if i.__class__.__name__=='Pedreiro':
                             print ('Presente em {} obras'.format(i.numObras))
                             
@@ -426,8 +431,6 @@ def opcoesFuncionarios():
                 while Fun_Cadastro==x.cadastro:
                     Fun_Cadastro=(random.randint(10000,100000))
             Fun_Salario = 1500
-               
-            
             
             if Faz_Cad=='Gestor':
                 anoContrat = int(input('Digite o ano da contratação[AAAA]: '))
@@ -439,9 +442,7 @@ def opcoesFuncionarios():
                         salarioTot = i.calculaSalario(Fun_Salario, anoContrat)
                         i.setSalario(salarioTot)
                         print(' ')
-                        print('Gestor cadastrado com sucesso!')
-                
-                
+                        print('Gestor cadastrado com sucesso!')     
                 
             elif Faz_Cad=='Pedreiro':
                 numObras = 0
@@ -473,7 +474,8 @@ def opcoesFuncionarios():
                                 print("  ")
                                 editaFunc2=int(input("Numero da ação a ser realizada: "))
                                 print(' ')
-                                #editaFunc2=verConsul(editaFunc)
+                                while not editaFunc2 in [1,2, 3, 4, 5]:
+                                    editaFunc2=int(input("Valor inválido! Numero da ação a ser realizada: "))
                             
                                 if editaFunc2==1:
                                     nome = input('Digite o novo nome do funcionário: ')
@@ -525,7 +527,8 @@ def opcoesFuncionarios():
                                 print("  ")
                                 editaFunc2=int(input("Numero da ação a ser realizada: "))
                                 print(' ')
-                                #editaFunc2=verConsul(editaFunc)
+                                while not editaFunc2 in [1,2, 3, 4]:
+                                    editaFunc2=int(input("Valor inválido! Numero da ação a ser realizada: "))
                             
                                 if editaFunc2==1:
                                     nome = input('Digite o novo nome do funcionário: ')
@@ -582,14 +585,21 @@ def opcoesFuncionarios():
                         print('   ')
                         Del_Fun_F=input('Excluir este funcionario?').title()
                         if Del_Fun_F=='Sim':
-                            for vsf in obras:
-                                if vsf.pedreiro==i:
-                                    print("O Funcionario é Mestre de obras e esta cadastrado em uma obra, altere o Mestre de obras de tal obra para poder exclui-lo")
-                                    break
-                                else:
-                                    funcionarios.remove(i)
-                                    print(' ')
-                                    print('Funcionário deletado com sucesso')
+                            if len(obras)!=0:
+                                for vsf in obras:
+                                    if vsf.pedreiro==i:
+                                        print("nao podi")
+                                        print("O Funcionario é Mestre de obras e esta cadastrado em uma obra, altere o Mestre de obras de tal obra para poder exclui-lo")
+                                        break
+                                    else:
+                                        funcionarios.remove(i)
+                                        print(' ')
+                                        print('Funcionário deletado com sucesso')
+                            else:
+                                funcionarios.remove(i)
+                                print(' ')
+                                print('Funcionário deletado com sucesso')
+                                
                                 
                 if flag==False:
                     print('Funcionário não cadastrado')
@@ -599,15 +609,13 @@ def opcoesFuncionarios():
         
 def faturamento():
     print("[--------------------------------Faturamento atual:--------------------------------]")
+    print(' ')
     faturament=0
     for grana in obras:
         faturament+=grana.total
-    print ('o faturamento da empresa, caso todas obras sejam acabadas em seus prazos e sem alteraçoes, sera de R${}'.format(faturament))
+    print ('O faturamento da empresa, caso todas obras sejam acabadas em seus prazos e sem alteraçoes, sera de R${}'.format(faturament))
+    print(' ')
     
-def consultaMain(x):
-    while not x in [1,2, 3, 4]:
-        x=int(input("Digite novamente o número da ação: "))
-    return x
 
 #main
 Pedreiro('Igor', '00000005252', '48999934599', 16745, 1500, 0)
