@@ -156,13 +156,13 @@ def opcoesObras():
             cod = random.randint(10000, 100000)
             o.setCod(cod)
             o.setCliente(cliente)
-            totalObra=0
+            vargra=0
             
             for i in range (len(materiais)):
                 print("O material", materiais[i]['nome'], "possui", materiais[i]['qtd'], "itens")
                 add_num_mat=int(input("Quantos voce deseja adicionar? a medida é em {} com o valor de R${}: ".format(materiais[i]['medição'], materiais[i]['preço'])))
                 materiais[i]['qtd']+=add_num_mat
-                totalObra+=(materiais[i]['preço']*add_num_mat*1.22)
+                vargra+=(materiais[i]['preço']*add_num_mat*1.22)
                 o.setMateriais(materiais)
 
 
@@ -191,8 +191,8 @@ def opcoesObras():
             o.setDataFim(dataFim)
             
             months = (o.dataFim.year - o.dataIn.year) * 12 + (o.dataFim.month - o.dataIn.month)
-            totalObra+=(months*350*1.22)
-            o.setTotal(totalObra)
+            vargra+=(months*350*1.22)
+            o.setTotal(vargra)
         
             obras.append(o) #adicionando à lista de objetos obra
             
@@ -244,15 +244,15 @@ def opcoesObras():
                                 Fazercoisa=int(input("O que você deseja fazer?: "))
                                 
                                 if Fazercoisa==1:
+                                    tururu=0
                                     for j in range(6):
                                         print("O material", i.materiais[j]['nome'], "possui", i.materiais[j]['qtd'], "itens")
                                         add_num_mat=int(input("Quantos voce deseja adicionar? a medida é em {} com o valor de R${}: ".format(i.materiais[j]['medição'], i.materiais[j]['preço'])))
                                         i.materiais[j]['qtd']+=add_num_mat
-                                    totalObra = 350*1.22
-                                    for x in range(6):
-                                        totalObra+= i.materiais[x]['qtd'] * i.materiais[x]['preço']
-                                    i.setTotal(totalObra)
+                                        tururu = (i.materiais[j]['qtd'] * i.materiais[j]['preço'])*1.22
+                                        i.setTotal(tururu)
                                     print('Materiais atualizados com sucesso!')
+                                    
                                     
                                 elif Fazercoisa==2:
                                     for j in range(6):
@@ -287,7 +287,18 @@ def opcoesObras():
                                 print(' ')
                                 #data_inicio = verificaData(aux)
                                 dataIn = datetime.strptime(aux, '%d/%m/%Y')
+                                kubs=0
+                                months = (i.dataFim.year - i.dataIn.year) * 12 + (i.dataFim.month - i.dataIn.month)
+                                kubs+=(months*350*1.22)
+                                i.setTotalRem(kubs)
+                                
                                 i.setDataIn(dataIn)
+                                
+                                casbran=0
+                                months = (i.dataFim.year - i.dataIn.year) * 12 + (i.dataFim.month - i.dataIn.month)
+                                casbran+=(months*350*1.22)
+                                i.setTotal(casbran)
+                                
                                 print('Data de início atualizada com sucesso')
                                 
                             if editaObra==5:
@@ -295,7 +306,18 @@ def opcoesObras():
                                 print(' ')
                                 #data_fim = verificaData(aux)
                                 dataFim = datetime.strptime(aux, '%d/%m/%Y')
+                                kubs=0
+                                months = (o.dataFim.year - o.dataIn.year) * 12 + (o.dataFim.month - o.dataIn.month)
+                                kubs+=(months*350*1.22)
+                                o.setTotalRem(kubs)
+                                
                                 i.setDataFim(dataFim)
+                                
+                                casbran=0
+                                months = (i.dataFim.year - i.dataIn.year) * 12 + (i.dataFim.month - i.dataIn.month)
+                                casbran+=(months*350*1.22)
+                                i.setTotal(casbran)
+                                
                                 print('Data de fim atualizada com sucesso!')
                                 
                             if editaObra==6:
@@ -637,13 +659,18 @@ def opcoesFuncionarios():
         
 def faturamento():
     print("[--------------------------------Faturamento atual:--------------------------------]")
+    dindin=0
     print(' ')
-    faturament=0
     for grana in obras:
-        faturament+=grana.total
-    print ('O faturamento da empresa, caso todas obras sejam acabadas em seus prazos e sem alteraçoes, sera de R${}'.format(faturament))
-    time.sleep(2)
-    print(' ')
+        dindin+=grana.total
+        casbran=0
+        months = (grana.dataFim.year - grana.dataIn.year) * 12 + (grana.dataFim.month - grana.dataIn.month)
+        casbran+=(months*350)
+        dindin-=casbran
+        print('O faturamento da empresa, caso todas obras sejam acabadas em seus prazos e sem alteraçoes, será de R${}'.format(dindin))
+    
+    
+    
     
 
 #main
@@ -685,3 +712,4 @@ while True:
         print("Por: Marina Benvenuti e Iago Munoz")
         print("Com agradecimentos a Alan Turing, ateu e homossexual, o pai da computação.")
         break
+
