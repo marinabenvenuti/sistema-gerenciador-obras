@@ -320,6 +320,7 @@ def opcoesObras():
         
 def opcoesFuncionarios():
     while True:
+        print(" ")
         print("[--------------------------------Menu de Funcionários--------------------------------]")
         print("  ")
         print("1) Exibir todos os funcionários cadastrados")
@@ -362,8 +363,10 @@ def opcoesFuncionarios():
             else:
                 print("[--------------------------------Pesquisar funcionário:--------------------------------]")
                 Pes_Fun=input('Nome do funcionario a ser pesquisado: ').title()
+                flag=False
                 for i in funcionarios:
                     if i.nome==Pes_Fun:
+                        flag=True
                         print ("   ")
                         print ('Cargo:', i.__class__.__name__)
                         print ('Cadastro:', i.cadastro)
@@ -376,6 +379,11 @@ def opcoesFuncionarios():
                             print ('Data contrataçao:', i.contra)
                         if i.__class__.__name__=='Pedreiro':
                             print ('Presente em {} obras'.format(i.numObras))
+                            
+                if flag==False:
+                    print(' ')
+                    print('Funcionário não cadastrado')
+                    print(' ')
                         
         if consultaFunc==3:
             #cadastro de novo funcionário
@@ -407,23 +415,92 @@ def opcoesFuncionarios():
                 semFuncionario()
             
             else:
+                flag=False
                 print("[--------------------------------Editar funcionário:--------------------------------]")
                 print(' ')
-                editFunc = input('Digite o nome completo do funcionário a ser editado: ')
+                editFunc = input('Digite o nome completo do funcionário a ser editado: ').title()
                 for i in funcionarios:
                     if i.nome == editFunc:
-                        nome = input('Digite o novo nome do funcionário: ')
-                        i.setNome(nome)
-                        
-                        cpf = input('Digite o novo cpf do funcionário: ')
-                        i.setCpf(cpf)
-                        
-                        fone = input('Digite o novo telefone do funcionário: ')
-                        i.setFone(fone)
-                        
+                        flag=True
                         if i.__class__.__name__=='Gestor':
-                            contratacao = int(input('Digite o novo ano de contratação do funcionário: '))
-                            i.setContra(contratacao)
+                            while True:
+                                print("  ")
+                                print("1) Editar nome")
+                                print("2) Editar CPF")
+                                print("3) Editar telefone")
+                                print("4) Editar ano de contratação")
+                                print("5) Voltar para o menu de funcionários")
+                                print("  ")
+                                editaFunc2=int(input("Numero da ação a ser realizada: "))
+                                print(' ')
+                                #editaFunc2=verConsul(editaFunc)
+                            
+                                if editaFunc2==1:
+                                    nome = input('Digite o novo nome do funcionário: ')
+                                    i.setNome(nome)
+                                    print(' ')
+                                    print('Nome atualizado com sucesso!')
+                                    
+                                if editaFunc2==2:
+                                    cpf = input('Digite o novo cpf do funcionário: ')
+                                    i.setCPF(cpf)
+                                    print(' ')
+                                    print('CPF atualizado com sucesso!')
+                                    
+                                if editaFunc2==3:
+                                    fone = input('Digite o novo telefone do funcionário: ')
+                                    i.setFone(fone)
+                                    print(' ')
+                                    print('Telefone atualizado com sucesso!')
+                                
+                                if editaFunc2==4:
+                                    contratacao = int(input('Digite o novo ano de contratação do funcionário: '))
+                                    i.setContra(contratacao)
+                                    print(' ')
+                                    print('Ano de contratação atualizado com sucesso!')
+                                    
+                                if editaFunc2==5:
+                                    break
+                                    
+                        else:
+                            while True:
+                                print("  ")
+                                print("1) Editar nome")
+                                print("2) Editar CPF")
+                                print("3) Editar telefone")
+                                print("4) Voltar para o menu de funcionários")
+                               
+                                print("  ")
+                                editaFunc2=int(input("Numero da ação a ser realizada: "))
+                                print(' ')
+                                #editaFunc2=verConsul(editaFunc)
+                            
+                                if editaFunc2==1:
+                                    nome = input('Digite o novo nome do funcionário: ')
+                                    i.setNome(nome)
+                                    print(' ')
+                                    print('Nome atualizado com sucesso!')
+                                    
+                                    
+                                if editaFunc2==2:
+                                    cpf = input('Digite o novo cpf do funcionário: ')
+                                    i.setCPF(cpf)
+                                    print(' ')
+                                    print('CPF atualizado com sucesso!')
+                                    
+                                if editaFunc2==3:
+                                    fone = input('Digite o novo telefone do funcionário: ')
+                                    i.setFone(fone)
+                                    print(' ')
+                                    print('Telefone atualizado com sucesso!')
+                                
+                                if editaFunc2==4:
+                                    break
+                                
+                if flag==False:
+                    print(' ')
+                    print('Funcionário não cadastrado')
+                            
                         
         if consultaFunc==5:
             #exclusão de funcionário
