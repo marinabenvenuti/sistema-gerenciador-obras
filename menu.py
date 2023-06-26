@@ -256,10 +256,14 @@ def opcoesObras():
                                 while True:
                                     nomePedr = input('Digite o nome completo do novo mestre de obra: ').title()
                                     print(' ')
-                                    for y in pedreiros:
-                                        if nomePedr == y.nome:
-                                            i.setPedreiro(nomePedr)
-                                            flagg = True
+                                   for y in pedreiros:
+                                        if nomePedr == y.nome:     
+                                            i.pedreiro.setNumObrasBosta()
+                                            i.pedreiro.calculaSalario()
+                                            i.setPedreiro(y)
+                                            i.pedreiro.setNumObras()
+                                            i.pedreiro.calculaSalario()
+                                            
                                     if flagg==True:
                                         break
                                     
