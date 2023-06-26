@@ -30,7 +30,15 @@ def semFuncionario():
     print(' ')
     time.sleep(1.5)
     
-    
+def verificaNumeros(x, valor):
+    while len(valor)!=x or not valor.isdigit():
+        valor=input('Valor inválido! Digite novamente: ')    
+    return valor
+
+def verificaAno(anoContrat):
+    while anoContrat<1990: #supomos que a empresa foi criada em 1990
+        anoContrat = int(input('Valor inválido! Digite o ano da contratação[AAAA]: '))
+    return anoContrat
     
 #def verificaData(aux):
  #   verif = 0
@@ -399,18 +407,31 @@ def opcoesFuncionarios():
             print("[--------------------------------Cadastrar funcionário:--------------------------------]")
             print(' ')
 
-            Faz_Cad=input('O que deseja cadastrar? ["Gestor/Pedreiro"]: ').title()   
+            Faz_Cad=input('O que deseja cadastrar? ["Gestor/Pedreiro"]: ').title()
+            while Faz_Cad!='Gestor' and Faz_Cad!='Pedreiro':
+                Faz_Cad=input('Valor inválido! O que deseja cadastrar? ["Gestor/Pedreiro"]: ').title()
+                
             Fun_Nome=input('Nome do Funcionario: ').title()
             Fun_CPF=input('CPF do funcionario[sem"." e "-"]: ')
-            Fun_Fone=input('Telefone do Funcionario[Com "9" e sem DDD]: ')
-            print(' ')
+            Fun_CPF=verificaNumeros(11, Fun_CPF)
+            for x in funcionarios:
+                while Fun_CPF==x.cpf:
+                    Fun_CPF=input('Esse CPF já está cadastrado! Digite o CPF do funcionario[sem"." e "-"]: ')
+                    Fun_CPF=verificaNumeros(11, Fun_CPF)
+            Fun_Fone=input('Telefone do Funcionario[DDD e número juntos]: ')
+            Fun_Fone=verificaNumeros(11, Fun_Fone)
             Fun_Cadastro=(random.randint(10000,100000))
-            Fun_Salario =1500
+            for x in funcionarios:
+                while Fun_Cadastro==x.cadastro:
+                    Fun_Cadastro=(random.randint(10000,100000))
+            Fun_Salario = 1500
                
             
             
             if Faz_Cad=='Gestor':
                 anoContrat = int(input('Digite o ano da contratação[AAAA]: '))
+                anoContrat=verificaAno(anoContrat)
+                    
                 Gestor(Fun_Nome, Fun_CPF, Fun_Fone, Fun_Cadastro, Fun_Salario, anoContrat)
                 for i in gestores:
                     if i==gestores[-1]:
@@ -461,22 +482,29 @@ def opcoesFuncionarios():
                                     
                                 if editaFunc2==2:
                                     cpf = input('Digite o novo cpf do funcionário: ')
+                                    cpf=verificaNumeros(11, cpf)
+                                    for x in funcionarios:
+                                        while cpf==x.cpf:
+                                            cpf=input('Esse CPF já está cadastrado! Digite o CPF do funcionario[sem"." e "-"]: ')
+                                            cpf=verificaNumeros(11, cpf)
                                     i.setCPF(cpf)
                                     print(' ')
                                     print('CPF atualizado com sucesso!')
                                     
                                 if editaFunc2==3:
                                     fone = input('Digite o novo telefone do funcionário: ')
+                                    fone=verificaNumeros(11, fone)
                                     i.setFone(fone)
                                     print(' ')
                                     print('Telefone atualizado com sucesso!')
                                 
                                 if editaFunc2==4:
-                                    contratacao = int(input('Digite o novo ano de contratação do funcionário: '))
-                                    i.setContra(contratacao)
+                                    anoContrat = int(input('Digite o novo ano de contratação do funcionário: '))
+                                    anoContrat=verificaAno(anoContrat)
+                                    i.setContra(anoContrat)
                                     for j in gestores:
                                         if i.nome==j.nome:
-                                            salarioTot = j.calculaSalario(1500, contratacao)
+                                            salarioTot = j.calculaSalario(1500, anoContrat)
                                             j.setSalario(salarioTot)
                         
                                             print(' ')
@@ -590,9 +618,9 @@ def consultaMain(x):
     return x
 
 #main
-Pedreiro('Igor', '00000005252', '999934599', 16745, 1500, 0)
-Pedreiro('Iago', '00000000000', '999999999', 12345, 1500,0)
-Gestor('Marina Benvenuti', '11111111111', '908888888', 23412, 1500, 2023)
+Pedreiro('Igor', '00000005252', '48999934599', 16745, 1500, 0)
+Pedreiro('Iago', '00000000000', '48999999999', 12345, 1500,0)
+Gestor('Marina Benvenuti', '11111111111', '48908888888', 23412, 1500, 2023)
 
 
 while True:
