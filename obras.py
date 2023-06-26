@@ -5,7 +5,7 @@ class Obra:
         self.cod = cod
         self.cliente = cliente
         self.materiais = materiais
-        self.total = total    
+        self.total = 0 
         self.pedreiro = nomePedr
         self.dataIn = dataIn
         self.dataFim = dataFim
@@ -40,5 +40,8 @@ class Obra:
     def setDataFim(self, dataFim):
         self.dataFim = dataFim
         
+    def setTotalRem(self, totalObra):
+        self.total -= totalObra
+        
     def setTotal(self, totalObra):
-        self.total = totalObra
+        self.total += totalObra
