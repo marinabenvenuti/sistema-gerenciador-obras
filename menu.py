@@ -256,7 +256,7 @@ def opcoesObras():
                                 while True:
                                     nomePedr = input('Digite o nome completo do novo mestre de obra: ').title()
                                     print(' ')
-                                   for y in pedreiros:
+                                    for y in pedreiros:
                                         if nomePedr == y.nome:     
                                             i.pedreiro.setNumObrasBosta()
                                             i.pedreiro.calculaSalario()
