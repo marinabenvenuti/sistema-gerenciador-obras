@@ -11,7 +11,7 @@ def printarObra(i):
         print ('Cliente: ', i.cliente)
         for j in range(len(i.materiais)):
             print (i.materiais[j]['nome'], "em quantidade de", i.materiais[j]['qtd'], "(unidade de medida em {})".format(i.materiais[j]['medição']))
-        print('Mestre de obra:', i.pedreiro)
+        print('Mestre de obra:', i.pedreiro.nome)
         print('Data de início:', i.dataIn)
         print('Data de fim:', i.dataFim)
         print('Valor total: R${}'.format(i.total))
@@ -54,6 +54,12 @@ def opcoesObras():
         print("5) Excluir obra")
         print("6) Voltar para o menu principal")
         print("  ")
+        
+    
+        
+                        
+                        
+                    
             
         consultaObra=int(input("Numero da ação a ser realizada: "))
         consultaObra=verConsul(consultaObra)
@@ -150,10 +156,12 @@ def opcoesObras():
             flag = False
             while True: #isso pode ser colocado numa função pois é usado na edição também
                 nomePedr = input('Digite o nome completo do mestre de obra: ')
+                
                 for pedreiro in pedreiros:
                     if nomePedr == pedreiro.nome:
-                        o.setPedreiro(nomePedr)
-                        setNumObras(pedreiro)
+                        o.setPedreiro(pedreiro)
+                    
+                            
                         flag = True
                 if flag==True:
                     break
@@ -173,7 +181,17 @@ def opcoesObras():
                 totalObra += material['qtd'] * material['preço']
             o.setTotal(totalObra)
             
+            
             obras.append(o) #adicionando à lista de objetos obra
+            
+            if len(obras)!=0:
+                for porra in obras: 
+                    for vsf in pedreiros:
+                        if porra.pedreiro==vsf:
+                            vsf.setNumObras()
+                            vsf.calculaSalario()
+                
+                        
             print('Obra cadastrada com sucesso!')
             
         elif consultaObra == 4:
@@ -351,7 +369,7 @@ def opcoesFuncionarios():
                         if i.__class__.__name__=='Gestor':
                             print ('Data contrataçao:', i.contra)
                         if i.__class__.__name__=='Pedreiro':
-                            print ('Presente em {} obras'.format(i.NumObras))
+                            print ('Presente em {} obras'.format(i.numObras))
                         
         if consultaFunc==3:
             #cadastro de novo funcionário
@@ -373,7 +391,7 @@ def opcoesFuncionarios():
                 
                 
             elif Faz_Cad=='Pedreiro':
-                numObras = int(input('Digite o número de obras: '))
+                numObras = 0
                 Pedreiro(Fun_Nome, Fun_CPF, Fun_Fone, Fun_Cadastro, Fun_Salario, numObras)
                 
                 
@@ -461,10 +479,10 @@ def consultaMain(x):
     return x
 
 #main
-pedreiros.append(Pedreiro('Igor', '00000005252', '999934599', 16745, 1500, 1))
-pedreiros.append(Pedreiro('Iago', '00000000000', '999999999', 12345, 1500, 0))
+Pedreiro('Igor', '00000005252', '999934599', 16745, 1500, 0)
+Pedreiro('Iago', '00000000000', '999999999', 12345, 1500,0)
 gestores.append(Gestor('Marina Benvenuti', '11111111111', '908888888', 23412, 1500, 2022))
-obras.append(Obra(12349, 'Jose', [{'nome': 'areia', 'medição': 'm³', 'qtd': 3, 'preço': 170.0}, {'nome': 'cal', 'medição': 'kg', 'qtd': 5, 'preço': 13.0}, {'nome': 'brita', 'medição': 'm³', 'qtd': 8, 'preço': 96.0}, {'nome': 'cimento', 'medição': 'kg', 'qtd': 3, 'preço': 30.0}, {'nome': 'telha de aço', 'medição': 'm²', 'qtd': 6, 'preço': 20.0}, {'nome': 'vergalhão', 'medição': 'm', 'qtd': 1, 'preço': 16.0}], 427.00, 'Iago Munoz', '30/07/2004', '12/11/2022')) 
+
 
 while True:
     print ("  ")
