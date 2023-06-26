@@ -300,9 +300,15 @@ def opcoesObras():
                         flag=True
                         Del_Fun_F=input('Excluir esta obra? [S/N] ').title()
                         if Del_Fun_F=='S':
+                            for porra in obras: 
+                                for vsf in pedreiros:
+                                    if porra.pedreiro==vsf:
+                                        vsf.setNumObrasBosta()
+                                        vsf.calculaSalario()
                             obras.remove(i)
                             print(' ')
                             print('Obra deletada com sucesso')
+                            
                             
                 if flag==False:
                     print('Obra não cadastrada')
@@ -481,7 +487,7 @@ def consultaMain(x):
 #main
 Pedreiro('Igor', '00000005252', '999934599', 16745, 1500, 0)
 Pedreiro('Iago', '00000000000', '999999999', 12345, 1500,0)
-gestores.append(Gestor('Marina Benvenuti', '11111111111', '908888888', 23412, 1500, 2022))
+Gestor('Marina Benvenuti', '11111111111', '908888888', 23412, 1500, 2022)
 
 
 while True:
