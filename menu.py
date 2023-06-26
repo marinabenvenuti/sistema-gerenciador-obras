@@ -42,7 +42,7 @@ def verificaAno(anoContrat):
 
 def verificaSN(x):
     while x!='S' and x!='N':
-        x = input('Inválido! Digite S para sim e N para não')
+        x = input('Inválido! Digite S para sim e N para não: ')
     return x
     
 #def verificaData(aux):
@@ -377,6 +377,8 @@ def opcoesFuncionarios():
                         print ('Data contrataçao:', i.anoContrat)
                     if i.__class__.__name__=='Pedreiro':
                         print ('Presente em {} obras'.format(i.numObras))
+                    time.sleep(0.25)
+                time.sleep(2)
                         
         if consultaFunc==2:
             #pesquisa de funcionário específico
@@ -402,11 +404,13 @@ def opcoesFuncionarios():
                             print ('Data contrataçao:', i.anoContrat)
                         if i.__class__.__name__=='Pedreiro':
                             print ('Presente em {} obras'.format(i.numObras))
+                        time.sleep(2)
                             
                 if flag==False:
                     print(' ')
                     print('Funcionário não cadastrado')
                     print(' ')
+                    time.sleep(1)
                         
         if consultaFunc==3:
             #cadastro de novo funcionário
@@ -442,12 +446,15 @@ def opcoesFuncionarios():
                         salarioTot = i.calculaSalario(Fun_Salario, anoContrat)
                         i.setSalario(salarioTot)
                         print(' ')
-                        print('Gestor cadastrado com sucesso!')     
+                        print('Gestor cadastrado com sucesso!')
+                        time.sleep(1)
                 
             elif Faz_Cad=='Pedreiro':
                 numObras = 0
                 Pedreiro(Fun_Nome, Fun_CPF, Fun_Fone, Fun_Cadastro, Fun_Salario, numObras)
+                print(' ')
                 print('Pedreiro cadastrado com sucesso!')
+                time.sleep(1)
                 
                 
         if consultaFunc==4:
@@ -482,6 +489,7 @@ def opcoesFuncionarios():
                                     i.setNome(nome)
                                     print(' ')
                                     print('Nome atualizado com sucesso!')
+                                    time.sleep(1)
                                     
                                 if editaFunc2==2:
                                     cpf = input('Digite o novo cpf do funcionário: ')
@@ -493,6 +501,7 @@ def opcoesFuncionarios():
                                     i.setCPF(cpf)
                                     print(' ')
                                     print('CPF atualizado com sucesso!')
+                                    time.sleep(1)
                                     
                                 if editaFunc2==3:
                                     fone = input('Digite o novo telefone do funcionário: ')
@@ -500,6 +509,7 @@ def opcoesFuncionarios():
                                     i.setFone(fone)
                                     print(' ')
                                     print('Telefone atualizado com sucesso!')
+                                    time.sleep(1)
                                 
                                 if editaFunc2==4:
                                     anoContrat = int(input('Digite o novo ano de contratação do funcionário: '))
@@ -512,6 +522,7 @@ def opcoesFuncionarios():
                         
                                             print(' ')
                                             print('Ano de contratação atualizado com sucesso!')
+                                            time.sleep(1)
                                     
                                 if editaFunc2==5:
                                     break
@@ -535,19 +546,28 @@ def opcoesFuncionarios():
                                     i.setNome(nome)
                                     print(' ')
                                     print('Nome atualizado com sucesso!')
+                                    time.sleep(1)
                                     
                                     
                                 if editaFunc2==2:
                                     cpf = input('Digite o novo cpf do funcionário: ')
+                                    cpf=verificaNumeros(11, cpf)
+                                    for x in funcionarios:
+                                        while cpf==x.cpf:
+                                            cpf=input('Esse CPF já está cadastrado! Digite o CPF do funcionario[sem"." e "-"]: ')
+                                            cpf=verificaNumeros(11, cpf)
                                     i.setCPF(cpf)
                                     print(' ')
                                     print('CPF atualizado com sucesso!')
+                                    time.sleep(1)
                                     
                                 if editaFunc2==3:
                                     fone = input('Digite o novo telefone do funcionário: ')
+                                    fone=verificaNumeros(11, fone)
                                     i.setFone(fone)
                                     print(' ')
                                     print('Telefone atualizado com sucesso!')
+                                    time.sleep(1)
                                 
                                 if editaFunc2==4:
                                     break
@@ -555,6 +575,7 @@ def opcoesFuncionarios():
                 if flag==False:
                     print(' ')
                     print('Funcionário não cadastrado')
+                    time.sleep(1)
                             
                         
         if consultaFunc==5:
@@ -583,26 +604,33 @@ def opcoesFuncionarios():
                             print ('Presente em {} obras'.format(i.numObras))
                         flag=True
                         print('   ')
-                        Del_Fun_F=input('Excluir este funcionario?').title()
-                        if Del_Fun_F=='Sim':
+                        Del_Fun_F=input('Excluir este funcionario? [S/N] ').title()
+                        Del_Fun_F = verificaSN(Del_Fun_F)
+                        if Del_Fun_F=='S':
                             if len(obras)!=0:
                                 for vsf in obras:
                                     if vsf.pedreiro==i:
-                                        print("nao podi")
+                                        print(' ')
                                         print("O Funcionario é Mestre de obras e esta cadastrado em uma obra, altere o Mestre de obras de tal obra para poder exclui-lo")
+                                        time.sleep(1)
                                         break
                                     else:
                                         funcionarios.remove(i)
                                         print(' ')
                                         print('Funcionário deletado com sucesso')
+                                        time.sleep(1)
                             else:
                                 funcionarios.remove(i)
                                 print(' ')
                                 print('Funcionário deletado com sucesso')
+                                time.sleep(1)
                                 
                                 
                 if flag==False:
+                    print(' ')
                     print('Funcionário não cadastrado')
+                    time.sleep(1)
+                    
                     
         if consultaFunc==6:
             break
@@ -614,6 +642,7 @@ def faturamento():
     for grana in obras:
         faturament+=grana.total
     print ('O faturamento da empresa, caso todas obras sejam acabadas em seus prazos e sem alteraçoes, sera de R${}'.format(faturament))
+    time.sleep(2)
     print(' ')
     
 
