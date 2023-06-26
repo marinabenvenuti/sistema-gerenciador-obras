@@ -191,7 +191,7 @@ def opcoesObras():
                             vsf.setNumObras()
                             vsf.calculaSalario()
                 
-                        
+            print(' ')            
             print('Obra cadastrada com sucesso!')
             
         elif consultaObra == 4:
@@ -221,6 +221,7 @@ def opcoesObras():
                             if editaObra==1:
                                 cliente = input('Novo cliente: ').title()
                                 i.setCliente(cliente)
+                                print('Cliente atualizado com sucesso!')
                                 
                             if editaObra==2:
                                 print("Voce deseja:")
@@ -238,6 +239,7 @@ def opcoesObras():
                                     for x in range(6):
                                         totalObra+= i.materiais[x]['qtd'] * i.materiais[x]['preço']
                                     i.setTotal(totalObra)
+                                    print('Materiais atualizados com sucesso!')
                                     
                                 elif Fazercoisa==2:
                                     for j in range(6):
@@ -246,10 +248,8 @@ def opcoesObras():
                                         while rem_num_mat>i.materiais[j]['qtd']:
                                             rem_num_mat=int(input("Digite novamente quantos foram utilizados?: "))
                                         i.materiais[j]['qtd']-=rem_num_mat
-                                    
-                                   
-                                
-                                
+                                        print('Materiais atualizados com sucesso!')
+                                                
                                 
                             if editaObra==3:
                                 flagg = False
@@ -257,14 +257,16 @@ def opcoesObras():
                                     nomePedr = input('Digite o nome completo do novo mestre de obra: ').title()
                                     print(' ')
                                     for y in pedreiros:
-                                        if nomePedr == y.nome:     
+                                        if nomePedr == y.nome:
                                             i.pedreiro.setNumObrasBosta()
                                             i.pedreiro.calculaSalario()
                                             i.setPedreiro(y)
                                             i.pedreiro.setNumObras()
                                             i.pedreiro.calculaSalario()
                                             
+                                            flagg = True
                                     if flagg==True:
+                                        print('Mestre de obras atualizado com sucesso!')
                                         break
                                     
                             if editaObra==4:
@@ -273,6 +275,7 @@ def opcoesObras():
                                 #data_inicio = verificaData(aux)
                                 dataIn = datetime.strptime(aux, '%d/%m/%Y')
                                 i.setDataIn(dataIn)
+                                print('Data de início atualizada com sucesso')
                                 
                             if editaObra==5:
                                 aux = str(input('Digite a nova data de fim da obra no formado "DD/MM/AAAA": '))
@@ -280,6 +283,7 @@ def opcoesObras():
                                 #data_fim = verificaData(aux)
                                 dataFim = datetime.strptime(aux, '%d/%m/%Y')
                                 i.setDataFim(dataFim)
+                                print('Data de fim atualizada com sucesso!')
                                 
                             if editaObra==6:
                                 break
@@ -336,6 +340,7 @@ def opcoesFuncionarios():
         print("  ")
             
         consultaFunc=int(input("Numero da ação a ser realizada: "))
+        print(' ')
         consultaFunc=verConsul(consultaFunc)
         
         if consultaFunc==1:
@@ -394,10 +399,11 @@ def opcoesFuncionarios():
             print("[--------------------------------Cadastrar funcionário:--------------------------------]")
             print(' ')
 
-            Faz_Cad=input('O que deseja cadastrar? ').title()   
+            Faz_Cad=input('O que deseja cadastrar? ["Gestor/Pedreiro"]: ').title()   
             Fun_Nome=input('Nome do Funcionario: ').title()
             Fun_CPF=input('CPF do funcionario[sem"." e "-"]: ')
             Fun_Fone=input('Telefone do Funcionario[Com "9" e sem DDD]: ')
+            print(' ')
             Fun_Cadastro=(random.randint(10000,100000))
             Fun_Salario =1500
                
@@ -406,11 +412,19 @@ def opcoesFuncionarios():
             if Faz_Cad=='Gestor':
                 anoContrat = int(input('Digite o ano da contratação[AAAA]: '))
                 Gestor(Fun_Nome, Fun_CPF, Fun_Fone, Fun_Cadastro, Fun_Salario, anoContrat)
+                for i in gestores:
+                    if i==gestores[-1]:
+                        salarioTot = i.calculaSalario(Fun_Salario, anoContrat)
+                        i.setSalario(salarioTot)
+                        print(' ')
+                        print('Gestor cadastrado com sucesso!')
+                
                 
                 
             elif Faz_Cad=='Pedreiro':
                 numObras = 0
                 Pedreiro(Fun_Nome, Fun_CPF, Fun_Fone, Fun_Cadastro, Fun_Salario, numObras)
+                print('Pedreiro cadastrado com sucesso!')
                 
                 
         if consultaFunc==4:
@@ -460,8 +474,13 @@ def opcoesFuncionarios():
                                 if editaFunc2==4:
                                     contratacao = int(input('Digite o novo ano de contratação do funcionário: '))
                                     i.setContra(contratacao)
-                                    print(' ')
-                                    print('Ano de contratação atualizado com sucesso!')
+                                    for j in gestores:
+                                        if i.nome==j.nome:
+                                            salarioTot = j.calculaSalario(1500, contratacao)
+                                            j.setSalario(salarioTot)
+                        
+                                            print(' ')
+                                            print('Ano de contratação atualizado com sucesso!')
                                     
                                 if editaFunc2==5:
                                     break
@@ -568,7 +587,7 @@ def consultaMain(x):
 #main
 Pedreiro('Igor', '00000005252', '999934599', 16745, 1500, 0)
 Pedreiro('Iago', '00000000000', '999999999', 12345, 1500,0)
-Gestor('Marina Benvenuti', '11111111111', '908888888', 23412, 1500, 2022)
+Gestor('Marina Benvenuti', '11111111111', '908888888', 23412, 1500, 2023)
 
 
 while True:
@@ -583,6 +602,7 @@ while True:
     print("  ")
         
     consulta=int(input("Numero da ação a ser realizada: "))
+    print(' ')
     consulta=consultaMain(consulta)
     
     if consulta == 1:
