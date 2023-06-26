@@ -555,7 +555,7 @@ def opcoesFuncionarios():
                         if Del_Fun_F=='Sim':
                             for vsf in obras:
                                 if vsf.pedreiro==i:
-                                    print("nao podi")
+                                    print("O Funcionario é Mestre de obras e esta cadastrado em uma obra, altere o Mestre de obras de tal obra para poder exclui-lo")
                                     break
                                 else:
                                     funcionarios.remove(i)
