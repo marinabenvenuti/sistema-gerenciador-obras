@@ -1,4 +1,3 @@
-
 funcionarios= []
 pedreiros = []
 gestores = []
@@ -59,12 +58,10 @@ class Pedreiro(Funcionario):
         funcionarios.append(self)
         pedreiros.append(self)
         
-    def calculaSalario(self, salario):
-        salarioTot = salario+(350*(self.NumObras))
-        return salarioTot
+    def calculaSalario(self):
+        self.salario = 1500+(350*(self.numObras))
+        
     
     def setNumObras(self):
+        print("fagfgafafaf")
         self.numObras += 1
-        
-        
-        
