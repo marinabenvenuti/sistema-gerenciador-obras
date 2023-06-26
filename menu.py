@@ -548,15 +548,20 @@ def opcoesFuncionarios():
                         if i.__class__.__name__=='Gestor':
                             print ('Data contrataçao:', i.contra)
                         if i.__class__.__name__=='Pedreiro':
-                            print ('Presente em {} obras'.format(i.NumObras))
-                        Flag=True
+                            print ('Presente em {} obras'.format(i.numObras))
+                        flag=True
                         print('   ')
                         Del_Fun_F=input('Excluir este funcionario?').title()
                         if Del_Fun_F=='Sim':
-                            funcionarios.remove(i)
-                            print(' ')
-                            print('Funcionário deletado com sucesso')
-                            
+                            for vsf in obras:
+                                if vsf.pedreiro==i:
+                                    print("nao podi")
+                                    break
+                                else:
+                                    funcionarios.remove(i)
+                                    print(' ')
+                                    print('Funcionário deletado com sucesso')
+                                
                 if flag==False:
                     print('Funcionário não cadastrado')
                     
