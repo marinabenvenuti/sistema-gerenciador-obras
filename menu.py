@@ -145,18 +145,20 @@ def opcoesObras():
             materiais.append(material.copy())
             
             print('--------------------------------Cadastrar obra:--------------------------------')
-                
+            
             cliente = input('Cliente: ').title()
             
             o = Obra('', '', '', '', '', '', '') # cria o objeto Obra
             cod = random.randint(10000, 100000)
             o.setCod(cod)
             o.setCliente(cliente)
+            totalObra=0
             
             for i in range (len(materiais)):
                 print("O material", materiais[i]['nome'], "possui", materiais[i]['qtd'], "itens")
                 add_num_mat=int(input("Quantos voce deseja adicionar? a medida é em {} com o valor de R${}: ".format(materiais[i]['medição'], materiais[i]['preço'])))
                 materiais[i]['qtd']+=add_num_mat
+                totalObra+=(materiais[i]['preço']*add_num_mat*1.22)
                 o.setMateriais(materiais)
 
 
@@ -184,12 +186,10 @@ def opcoesObras():
             dataFim = datetime.strptime(aux, '%d/%m/%Y')
             o.setDataFim(dataFim)
             
-            totalObra = 350*1.22
-            for i in materiais:
-                totalObra += material['qtd'] * material['preço']
+            months = (o.dataFim.year - o.dataIn.year) * 12 + (o.dataFim.month - o.dataIn.month)
+            totalObra+=(months*350*1.22)
             o.setTotal(totalObra)
-            
-            
+        
             obras.append(o) #adicionando à lista de objetos obra
             
             if len(obras)!=0:
@@ -201,6 +201,7 @@ def opcoesObras():
                 
             print(' ')            
             print('Obra cadastrada com sucesso!')
+            
             
         elif consultaObra == 4:
             print('--------------------------------Editar obra:--------------------------------')
@@ -598,19 +599,10 @@ def opcoesFuncionarios():
         
 def faturamento():
     print("[--------------------------------Faturamento atual:--------------------------------]")
-    dinheiroGestores = 0
-    for i in gestores:
-        dinheiroGestores = i.salario
-    aux = 0    
-    for i in pedreiros:
-        aux += i.salario-1000
-    
-    dinheiroPedreiros = len(pedreiros)*1000
-    
-    for i in obras:
-        dinheiroObras = i.total-aux
-    dinTotal = dinheiroObras - dinheiroGestores - dinheiroPedreiros
-    print(f'O faturamento atual da empresa é de R${dinTotal}')
+    faturament=0
+    for grana in obras:
+        faturament+=grana.total
+    print ('o faturamento da empresa, caso todas obras sejam acabadas em seus prazos e sem alteraçoes, sera de R${}'.format(faturament))
     
 def consultaMain(x):
     while not x in [1,2, 3, 4]:
