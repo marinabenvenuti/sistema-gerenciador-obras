@@ -9,8 +9,7 @@ class Obra:
         self.pedreiro = nomePedr
         self.dataIn = dataIn
         self.dataFim = dataFim
-        
-    
+            
     def setCod(self, cod):
         self.cod = cod
         
