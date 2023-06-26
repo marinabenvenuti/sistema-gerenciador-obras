@@ -43,9 +43,12 @@ class Gestor(Funcionario):
     def setContra(self, contratacao):
         self.anoContrat = contratacao
         
-    def calculaSalario(self, salario):
+    def calculaSalario(self, salario, anoContrat):
         salarioTot = salario+(500*(2023-self.anoContrat))
         return salarioTot
+    
+    def setSalario(self, salarioTot):
+        self.salario = salarioTot
         
 class Pedreiro(Funcionario):
     def __init__(self, Fun_Nome, Fun_CPF, Fun_Fone, Fun_Cadastro, Fun_Salario, numObras):
@@ -61,4 +64,4 @@ class Pedreiro(Funcionario):
         self.numObras += 1
         
     def setNumObrasBosta(self):
-        self.numObras -= 1  
+        self.numObras -= 1      
