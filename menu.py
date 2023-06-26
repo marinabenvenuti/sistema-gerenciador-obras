@@ -169,7 +169,7 @@ def opcoesObras():
             
             flag = False
             while True: #isso pode ser colocado numa função pois é usado na edição também
-                nomePedr = input('Digite o nome completo do mestre de obra: ')
+                nomePedr = input('Digite o nome completo do mestre de obra: ').title()
                 
                 for pedreiro in pedreiros:
                     if nomePedr == pedreiro.nome:
@@ -578,7 +578,7 @@ def opcoesFuncionarios():
                         print ('Contato: {}-{}'.format(i.fone[0:5], i.fone[5:9]))
                         
                         if i.__class__.__name__=='Gestor':
-                            print ('Data contrataçao:', i.contra)
+                            print ('Data contrataçao:', i.anoContrat)
                         if i.__class__.__name__=='Pedreiro':
                             print ('Presente em {} obras'.format(i.numObras))
                         flag=True
