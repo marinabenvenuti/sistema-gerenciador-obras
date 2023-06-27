@@ -2,8 +2,6 @@ funcionarios= []
 pedreiros = []
 gestores = []
 
-
-
 class Funcionario:
     def __init__(self, Fun_Nome, Fun_CPF, Fun_Fone, Fun_Cadastro, Fun_Salario):
         self.nome = Fun_Nome
@@ -29,10 +27,7 @@ class Funcionario:
         
     def setSalario(self, salarioTot):
         self.salario = salarioTot
-        
-        
-    
-        
+                
 class Gestor(Funcionario):    
     def __init__(self, Fun_Nome, Fun_CPF, Fun_Fone, Fun_Cadastro, Fun_Salario, anoContrat):
         super().__init__(Fun_Nome, Fun_CPF, Fun_Fone, Fun_Cadastro, Fun_Salario)
