@@ -773,14 +773,19 @@ def faturamento():
     print("[--------------------------------Faturamento atual:--------------------------------]")
     dindin=0
     print(' ')
-    for grana in obras:
-        dindin+=grana.total
-        casbran=0
-        months = (grana.dataFim.year - grana.dataIn.year) * 12 + (grana.dataFim.month - grana.dataIn.month)
-        casbran+=((months+1)*350)
-        dindin-=casbran
-        print('O faturamento da empresa, caso todas obras sejam acabadas em seus prazos e sem alterações, não contando com o desconto do salários dos funcionários, porém considerando o adicional por obra do pedreiro, será de R${:.2f}'.format(dindin))
-        time.sleep(2)
+    if len(obras)==0:
+        print("Nenhuma obra cadastrada, faturamento nulo.")
+    else:
+        
+        for grana in obras:
+            dindin+=grana.total
+            casbran=0
+            months = (grana.dataFim.year - grana.dataIn.year) * 12 + (grana.dataFim.month - grana.dataIn.month)
+            casbran+=((months+1)*350)
+            
+            dindin-=casbran
+            print('O faturamento da empresa, caso todas obras sejam acabadas em seus prazos e sem alterações, não contando com o desconto do salários dos funcionários, porém considerando o adicional por obra do pedreiro, será de R${:.2f}'.format(dindin))
+            time.sleep(2)
    
 
 #main
