@@ -568,7 +568,7 @@ def opcoesFuncionarios():
             print("    ")
             while Faz_Cad!='Gestor' and Faz_Cad!='Pedreiro':
                 Faz_Cad=input('Valor inválido! O que deseja cadastrar? ["Gestor/Pedreiro"]: ').title()
-            #print(' ')    
+            
             Fun_Nome=input('Nome do Funcionario: ').title()
             Fun_CPF=input('CPF do funcionario[sem"." e "-"]: ')
             Fun_CPF=verificaNumeros(11, Fun_CPF)
@@ -598,7 +598,7 @@ def opcoesFuncionarios():
                         print("    ")
                         salarioTot = i.calculaSalario(Fun_Salario, anoContrat)
                         i.setSalario(salarioTot)
-                        #print(' ')
+                        
                         print('Gestor cadastrado com sucesso!')
                         time.sleep(1)
                 
