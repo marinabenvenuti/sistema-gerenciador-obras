@@ -353,6 +353,7 @@ def opcoesObras():
                                             i.pedreiro.calculaSalario()
                                             i.setPedreiro(y)
                                             i.pedreiro.setNumObras()
+                                            i.pedreiro.calculaSalario()
                                             flagg = True
                                     if flagg==True:
                                         print(' ')
