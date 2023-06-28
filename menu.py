@@ -26,7 +26,7 @@ def printarObrass(i):
     print('Mestre de obra:', i.pedreiro.nome)
     print('Data de início:', i.dataIn)
     print('Data de fim:', i.dataFim)
-    print('Valor total: R${}'.format(i.total))
+    print('Valor total: R${:.2f}'.format(i.total))
     time.sleep(0.5)
         
 def semObra():
@@ -46,6 +46,10 @@ def verificaNumeros(x, valor):
     return valor
 
 def verificaAno(anoContrat):
+    while not anoContrat.isdigit():
+        print("    ")
+        anoContrat = input('Digite o ano novamente: ')
+    anoContrat = int(anoContrat)
     print("    ")
     while anoContrat<1990: #supomos que a empresa foi criada em 1990
         anoContrat = int(input('Valor inválido! Digite o ano da contratação[AAAA]: '))
@@ -58,15 +62,11 @@ def verificaSN(x):
     return x
 
 def verificaNs(x):
-    if x.isdigit():
-        x = int(x)
-        return x
-    else:
-        while not x.isdigit():
-            print("    ")
-            x = input('Digite o valor novamente: ')
-        x = int(x)
-        return x        
+    while not x.isdigit():
+        print("    ")
+        x = input('Digite o valor novamente: ')
+    x = int(x)
+    return x        
 
 def verificaData(aux):
     if len(aux)!=10:
@@ -100,15 +100,15 @@ def verificaData(aux):
         return False
 
 def verConsul(x):
-    while not x in [1,2, 3, 4, 5, 6]:
+    while not x in ['1','2', '3', '4', '5', '6']:
         print("    ")
-        x=int(input("Digite novamente o número da ação: "))
+        x=(input("Digite novamente o número da ação: "))
     return x
 
 def consultaMain(x):
-    while not x in [1, 2, 3, 4]:
+    while not x in ['1', '2', '3', '4']:
         print("    ")
-        x=int(input("Digite novamente o número da ação: "))
+        x=(input("Digite novamente o número da ação: "))
     return x
 
 def opcoesObras():
@@ -126,8 +126,8 @@ def opcoesObras():
    
         consultaObra=(input("Numero da ação a ser realizada: "))
         
-        consultaObra=verificaNs(consultaObra)
         consultaObra=verConsul(consultaObra)
+        consultaObra=verificaNs(consultaObra)
         
         if consultaObra==1:
             print("    ")
@@ -228,15 +228,19 @@ def opcoesObras():
   
             flag = False
             print("    ")
+            cont=0
             while True: #isso pode ser colocado numa função pois é usado na edição também
-                
-                nomePedr = input('Digite o nome completo do mestre de obra: ').title()  
+                if cont==0:
+                    nomePedr = input('Digite o nome completo do mestre de obra: ').title()
+                else:
+                    nomePedr = input('O mestre de obras digitado não está cadastrado. Tente novamente: ').title()
                 for pedreiro in pedreiros:
                     if nomePedr == pedreiro.nome:
                         o.setPedreiro(pedreiro)    
                         flag = True
                 if flag==True:
                     break
+                cont+=1
             
             print("    ")
             aux = str(input('Digite a data de início da obra no formato "DD/MM/AAAA": '))
@@ -300,8 +304,9 @@ def opcoesObras():
                             print("5) Editar data de fim")
                             print("6) Voltar para o menu de obras")
                             print("    ")
-                            editaObra=int(input("Numero da ação a ser realizada: "))
-                            consultaObra=verConsul(editaObra)
+                            editaObra=(input("Numero da ação a ser realizada: "))
+                            editaObra=verConsul(editaObra)
+                            editaObra=verificaNs(editaObra)
                             if editaObra==1:
                                 print("    ")
                                 cliente = input('Novo cliente: ').title()
@@ -344,11 +349,11 @@ def opcoesObras():
                                     for j in range(6):
                                         print("    ")
                                         print("O material", i.materiais[j]['nome'], "possui", i.materiais[j]['qtd'], "itens")
-                                        rem_num_mat=(input("Quantos foram utilizados?: "))
-                                        rem_num_mat = verificaNs(add_num_mat)
+                                        rem_num_mat=input("Quantos foram utilizados?: ")
+                                        rem_num_mat = verificaNs(rem_num_mat)
                                         while rem_num_mat>i.materiais[j]['qtd']:
-                                            rem_num_mat=(input("Digite novamente quantos foram utilizados?: "))
-                                            rem_num_mat = verificaNs(add_num_mat)
+                                            rem_num_mat=input("Digite novamente quantos foram utilizados?: ")
+                                            rem_num_mat = verificaNs(rem_num_mat)
                                         i.materiais[j]['qtd']-=rem_num_mat
                                     print("    ")
                                     print('Materiais atualizados com sucesso!')
@@ -358,9 +363,16 @@ def opcoesObras():
                             if editaObra==3:
                                 flagg = False
                                 print("    ")
+                                cont=0
                                 while True:
-                                    
-                                    nomePedr = input('Digite o nome completo do novo mestre de obra: ').title()
+                                    if cont==0:
+                                        nomePedr = input('Digite o nome completo do mestre de obra: ').title()
+                                    else:
+                                        nomePedr = input('O mestre de obras digitado não está cadastrado. Tente novamente: ').title()
+                                    for pedreiro in pedreiros:
+                                        if nomePedr == pedreiro.nome:
+                                            o.setPedreiro(pedreiro)    
+                                            flagg = True
                                     
                                     for y in pedreiros:
                                         if nomePedr == y.nome:
@@ -373,9 +385,9 @@ def opcoesObras():
                                     if flagg==True:
                                         print("    ")
                                         print('Mestre de obras atualizado com sucesso!')
-                                        
                                         time.sleep(1)
                                         break
+                                    cont+=1
                                     
                             if editaObra==4:
                                 print("    ")
@@ -497,9 +509,8 @@ def opcoesFuncionarios():
         print("    ")
             
         consultaFunc=input("Numero da ação a ser realizada: ")
-        
-        consultaFunc = verificaNs(consultaFunc)
         consultaFunc=verConsul(consultaFunc)
+        consultaFunc = verificaNs(consultaFunc)
         
         if consultaFunc==1:
             #exibir todos os funcionários da empresa
@@ -589,7 +600,6 @@ def opcoesFuncionarios():
             if Faz_Cad=='Gestor':
                 print("    ")
                 anoContrat = input('Digite o ano da contratação[AAAA]: ')
-                anoContrat=verificaNs(anoContrat)
                 anoContrat=verificaAno(anoContrat)
                     
                 Gestor(Fun_Nome, Fun_CPF, Fun_Fone, Fun_Cadastro, Fun_Salario, anoContrat)
@@ -675,7 +685,6 @@ def opcoesFuncionarios():
                                 if editaFunc2==4:
                                     print("    ")
                                     anoContrat = (input('Digite o novo ano de contratação do funcionário: '))
-                                    anoContrat = verificaNs(anoContrat)
                                     anoContrat=verificaAno(anoContrat)
                                     i.setContra(anoContrat)
                                     for j in gestores:
@@ -847,8 +856,8 @@ while True:
         
     consulta=(input("Numero da ação a ser realizada: "))
     
-    consulta=verificaNs(consulta)
     consulta=consultaMain(consulta)
+    consulta=verificaNs(consulta)
     
     if consulta == 1:
         opcoesObras()
