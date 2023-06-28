@@ -1,3 +1,5 @@
+#Marina Benvenuti Cardeal 23103131
+#Iago Rodrigues Munoz 23104313
 funcionarios= []
 pedreiros = []
 gestores = []
@@ -55,9 +57,8 @@ class Pedreiro(Funcionario):
     def calculaSalario(self):
         self.salario = 1500+(350*(self.numObras))
         
-    def setNumObras(self,droga):
-        self.numObras =droga
+    def setNumObras(self):
+        self.numObras += 1
         
     def setNumObrasBosta(self):
         self.numObras -= 1      
-
