@@ -268,10 +268,12 @@ def opcoesObras():
             o.setTotal(vargra)     
             obras.append(o) #adicionando à lista de objetos obra
             if len(obras)!=0:
+                droga=0
                 for porra in obras: 
                     for vsf in pedreiros:
                         if porra.pedreiro==vsf:
-                            vsf.setNumObras()
+                            droga+=1
+                            vsf.setNumObras(droga)
                             vsf.calculaSalario()
                 
             print("    ")      
@@ -878,3 +880,4 @@ while True:
         print("Por: Marina Benvenuti e Iago Munoz")
         print("Programa encerrado com sucesso! ")
         break
+
