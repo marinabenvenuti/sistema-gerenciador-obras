@@ -1,3 +1,5 @@
+#Marina Benvenuti Cardeal 23103131
+#Iago Rodrigues Munoz 23104313
 import time
 from datetime import datetime 
 import random
@@ -252,8 +254,12 @@ def opcoesObras():
             o.setDataIn(dataIn)
             
             print("    ")
+            cont=0
             while True:
-                aux = str(input('Digite a data de fim da obra no formato "DD/MM/AAAA": '))
+                if cont==0:
+                    aux = str(input('Digite a data de fim da obra no formato "DD/MM/AAAA": '))
+                else:
+                    aux = str(input('Data inválida! Digite a data de fim da obra no formato "DD/MM/AAAA": '))
                 dataFim = verificaData(aux)
                 while dataFim==False:
                     aux = str(input('Data inválida! Digite a data de fim da obra no formato "DD/MM/AAAA": '))
@@ -262,18 +268,17 @@ def opcoesObras():
 
                 if dataIn<dataFim:
                     break
+                cont+=1
             o.setDataFim(dataFim) 
             months = (o.dataFim.year - o.dataIn.year) * 12 + (o.dataFim.month - o.dataIn.month)
             vargra+=((months+1)*350*1.22)
             o.setTotal(vargra)     
             obras.append(o) #adicionando à lista de objetos obra
             if len(obras)!=0:
-                droga=0
                 for porra in obras: 
                     for vsf in pedreiros:
                         if porra.pedreiro==vsf:
-                            droga+=1
-                            vsf.setNumObras(droga)
+                            vsf.setNumObras()
                             vsf.calculaSalario()
                 
             print("    ")      
@@ -416,11 +421,14 @@ def opcoesObras():
                                 time.sleep(1)
                                 
                             if editaObra==5:
-                                print("    ")
-                                aux = str(input('Digite a nova data de fim da obra no formato "DD/MM/AAAA": '))
-                                print("    ")
+                                cont=0
                                 while True:
-        
+                                    if cont==0:
+                                        print("    ")
+                                        aux = str(input('Digite a nova data de fim da obra no formato "DD/MM/AAAA": '))
+                                        print("    ")
+                                    else:
+                                        aux = str(input('Data inválida! Digite a data de fim da obra no formato "DD/MM/AAAA": '))
                                     dataFim = verificaData(aux)
                                     while dataFim==False:
                                         aux = str(input('Data inválida! Digite a data de fim da obra no formato "DD/MM/AAAA": '))
@@ -429,6 +437,7 @@ def opcoesObras():
 
                                     if i.dataIn<dataFim:
                                         break
+                                    cont+=1
                                 kubs=0
                                 months = (o.dataFim.year - o.dataIn.year) * 12 + (o.dataFim.month - o.dataIn.month)
                                 kubs+=((months+1)*350*1.22)
@@ -880,4 +889,3 @@ while True:
         print("Por: Marina Benvenuti e Iago Munoz")
         print("Programa encerrado com sucesso! ")
         break
-
