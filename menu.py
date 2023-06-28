@@ -377,7 +377,7 @@ def opcoesObras():
                                         nomePedr = input('O mestre de obras digitado não está cadastrado. Tente novamente: ').title()
                                     for pedreiro in pedreiros:
                                         if nomePedr == pedreiro.nome:
-                                            o.setPedreiro(pedreiro)    
+                                            i.setPedreiro(pedreiro)    
                                             flagg = True
                                     
                                     for y in pedreiros:
@@ -487,9 +487,9 @@ def opcoesObras():
                                 if i.pedreiro==vsf:
                                     vsf.setNumObrasBosta()
                                     vsf.calculaSalario()
-                                obras.remove(i)
-                                print("    ")
-                                print('Obra deletada com sucesso')
+                            obras.remove(i)
+                            print("    ")
+                            print('Obra deletada com sucesso')
                                 
                                 time.sleep(1)
                             
