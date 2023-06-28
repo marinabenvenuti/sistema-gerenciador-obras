@@ -1,4 +1,4 @@
-Marina Benvenuti Cardeal 23103131
+#Marina Benvenuti Cardeal 23103131
 #Iago Rodrigues Munoz 23104313
 import time
 from datetime import datetime 
@@ -151,10 +151,10 @@ def opcoesObras():
                 
             else:
                 print("    ")
-                cliente_pesquisa = input('Digite o nome do cliente da obra: ').title()
+                cliente_pesquisa = input('Digite o id da obra a ser pesquisada: ')
                 flag=False
                 for i in obras:  # percorre a lista de obras
-                    if cliente_pesquisa == i.cliente: 
+                    if int(cliente_pesquisa) == i.cod: 
                         printarObrass(i)
                         flag=True
                         
@@ -294,12 +294,12 @@ def opcoesObras():
             
             else:
                 print("    ")
-                cliente_pesquisa = input('Digite o nome do cliente da obra a ser editada: ').title()
+                cliente_pesquisa = input('Digite o nome do id da obra a ser editada: ')
                 
                 flag=False
                 
                 for i in obras:  # percorre a lista de obras
-                    if cliente_pesquisa == i.cliente:  # busca pelo cliente da obra a ser alterado
+                    if int(cliente_pesquisa) == i.cod:  # busca pelo cliente da obra a ser alterado
                         print("    ")
                         while True:
                             
@@ -313,6 +313,7 @@ def opcoesObras():
                             editaObra=(input("Numero da ação a ser realizada: "))
                             editaObra=verConsul(editaObra)
                             editaObra=verificaNs(editaObra)
+                            
                             if editaObra==1:
                                 print("    ")
                                 cliente = input('Novo cliente: ').title()
@@ -365,35 +366,29 @@ def opcoesObras():
                                     print('Materiais atualizados com sucesso!')
                                     
                                     time.sleep(1)
-                                
+                            
                             if editaObra==3:
-                                flagg = False
-                                print("    ")
-                                cont=0
-                                while True:
-                                    if cont==0:
-                                        nomePedr = input('Digite o nome completo do mestre de obra: ').title()
-                                    else:
-                                        nomePedr = input('O mestre de obras digitado não está cadastrado. Tente novamente: ').title()
-                                    for pedreiro in pedreiros:
-                                        if nomePedr == pedreiro.nome:
-                                            i.setPedreiro(pedreiro)    
-                                            flagg = True
-                                    
-                                    for y in pedreiros:
-                                        if nomePedr == y.nome:
+                                
+                                nomePedr = input('Digite o nome completo do novo mestre de obra: ').title()
+                                contsocorro=0
+                                for chama in pedreiros:
+                                    if nomePedr==chama.nome:
+                                        contsocorro+=1
+                                        if contsocorro==1:
                                             i.pedreiro.setNumObrasBosta()
                                             i.pedreiro.calculaSalario()
-                                            i.setPedreiro(y)
+                                            i.setPedreiro(chama)
                                             i.pedreiro.setNumObras()
                                             i.pedreiro.calculaSalario()
-                                            flagg = True
-                                    if flagg==True:
-                                        print("    ")
-                                        print('Mestre de obras atualizado com sucesso!')
-                                        time.sleep(1)
-                                        break
-                                    cont+=1
+                                            print("    ")
+                                            print('Mestre de obras atualizado com sucesso!')
+                                            time.sleep(1)
+                                            break
+                                        elif contsocorro==0:
+                                            print('O mestre de obras digitado não está cadastrado. Tente novamente: ')
+                                        
+                                
+                            
                                     
                             if editaObra==4:
                                 print("    ")
@@ -452,6 +447,7 @@ def opcoesObras():
                                 print('Data de fim atualizada com sucesso!')
                                 
                                 time.sleep(1)
+                            
                             if editaObra==6:
                                 break
                         
@@ -471,11 +467,11 @@ def opcoesObras():
                 print("    ")
                 print('[--------------------------------Excluir obra:--------------------------------]')
                 print("    ")
-                cliente_pesquisa = input('Digite o nome do cliente da obra a ser excluída: ').title()
+                cliente_pesquisa = input('Digite o id da obra a ser excluída: ')
                 
                 flag=False
                 for i in obras:  # percorre a lista de obras
-                    if cliente_pesquisa == i.cliente: 
+                    if int(cliente_pesquisa) == i.cod: 
                         printarObrass(i)
                         flag=True
                         print("    ")
@@ -828,3 +824,63 @@ def opcoesFuncionarios():
         if consultaFunc==6:
             break
         
+def faturamento():
+    print("    ")
+    print("[--------------------------------Faturamento atual:--------------------------------]")
+    dindin=0
+    print("    ")
+    if len(obras)==0:
+        print("Nenhuma obra cadastrada, faturamento nulo.")
+        time.sleep(2)
+    else:
+        
+        for grana in obras:
+            dindin+=grana.total
+            casbran=0
+            months = (grana.dataFim.year - grana.dataIn.year) * 12 + (grana.dataFim.month - grana.dataIn.month)
+            casbran+=((months+1)*350)
+            
+            dindin-=casbran
+            print("    ")
+            print('O faturamento da empresa, caso todas obras sejam acabadas em seus prazos e sem alterações, não contando com o desconto do salários dos funcionários, porém considerando o adicional por obra do pedreiro, será de R${:.2f}'.format(dindin))
+            time.sleep(2)
+   
+#main
+Pedreiro('Igor', '00000005252', '48999934599', 16745, 1500, 0)
+Pedreiro('Iago', '00000000000', '48999999999', 12345, 1500,0)
+Gestor('Marina Benvenuti', '11111111111', '48908888888', 23412, 1500, 2023)
+
+while True:
+    print ("  ")
+    print("[--------------------Sistema Gerenciador de Obras--------------------]")
+    print("[-----------------------------------Menu-----------------------------------]")
+    print("    ")
+    print("1) Obras")
+    print("2) Funcionários")
+    print("3) Faturamento da empresa")
+    print("4) Encerrar programa")
+    print("    ")
+        
+    consulta=(input("Numero da ação a ser realizada: "))
+    
+    consulta=consultaMain(consulta)
+    consulta=verificaNs(consulta)
+    
+    if consulta == 1:
+        opcoesObras()
+            
+    elif consulta == 2:
+        opcoesFuncionarios()
+        
+    elif consulta == 3:
+        faturamento()
+    
+    elif consulta == 4:
+        print("Programa encerrando...")
+        for i in range (2):
+            print("...")
+            time.sleep(1)
+            
+        print("Por: Marina Benvenuti e Iago Munoz")
+        print("Programa encerrado com sucesso! ")
+        break
