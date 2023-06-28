@@ -317,7 +317,7 @@ def opcoesObras():
                                 
                             if editaObra==2:
                                 print("    ")
-                                print("Voce deseja:")
+                                print("Você deseja:")
                                 print("1)Adicionar materiais")
                                 print("2)Remover materiais")
                                 print("    ")
@@ -415,10 +415,10 @@ def opcoesObras():
                                 
                             if editaObra==5:
                                 print("    ")
-                                aux = str(input('Digite a nova data de fim da obra no formado "DD/MM/AAAA": '))
+                                aux = str(input('Digite a nova data de fim da obra no formato "DD/MM/AAAA": '))
                                 print("    ")
                                 while True:
-                                    aux = str(input('Digite a data de fim da obra no formato "DD/MM/AAAA": '))
+        
                                     dataFim = verificaData(aux)
                                     while dataFim==False:
                                         aux = str(input('Data inválida! Digite a data de fim da obra no formato "DD/MM/AAAA": '))
@@ -530,7 +530,7 @@ def opcoesFuncionarios():
                     print ('Contato: (0{}){}-{}'.format(i.fone[0:2], i.fone[2:7], i.fone[7:12]))
 
                     if i.__class__.__name__=='Gestor':
-                        print ('Data contrataçao:', i.anoContrat)
+                        print ('Data contratação:', i.anoContrat)
                     if i.__class__.__name__=='Pedreiro':
                         print ('Presente em {} obras'.format(i.numObras))
                     time.sleep(0.25)
@@ -555,7 +555,7 @@ def opcoesFuncionarios():
                         print ('Nome:', i.nome)
                         print ('Salario: R${}'.format(i.salario))
                         print ('CPF: {}.{}.{}-{}'.format(i.cpf[0:3], i.cpf[3:6], i.cpf[6:9], i.cpf[9:11]))
-                        print ('Contato: ({}){}-{}'.format(i.fone[0:1], i.fone[2:5], i.fone[6:10]))
+                        print ('Contato: (0{}){}-{}'.format(i.fone[0:2], i.fone[2:7], i.fone[7:12]))
                         
                         if i.__class__.__name__=='Gestor':
                             print ('Data contrataçao:', i.anoContrat)
@@ -717,7 +717,7 @@ def opcoesFuncionarios():
                                     editaFunc2=verificaNs(editaFunc2)
                                 if editaFunc2==1:
                                     print("    ")
-                                    nome = input('Digite o novo nome do funcionário: ')
+                                    nome = input('Digite o novo nome do funcionário: ').title()
                                     i.setNome(nome)
                                     print("    ")
                                     print('Nome atualizado com sucesso!')
@@ -777,7 +777,7 @@ def opcoesFuncionarios():
                         print ('Nome:', i.nome)
                         print ('Salario: R${}'.format(i.salario))
                         print ('CPF: {}.{}.{}-{}'.format(i.cpf[0:3], i.cpf[3:6], i.cpf[6:9], i.cpf[9:11]))
-                        print ('Contato: {}-{}'.format(i.fone[0:5], i.fone[5:9]))
+                        print ('Contato: (0{}){}-{}'.format(i.fone[0:2], i.fone[2:7], i.fone[7:12]))
                         
                         if i.__class__.__name__=='Gestor':
                             print ('Data contratação: ', i.anoContrat)
@@ -825,6 +825,7 @@ def faturamento():
     print("    ")
     if len(obras)==0:
         print("Nenhuma obra cadastrada, faturamento nulo.")
+        time.sleep(2)
     else:
         
         for grana in obras:
