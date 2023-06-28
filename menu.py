@@ -491,7 +491,7 @@ def opcoesObras():
                             print("    ")
                             print('Obra deletada com sucesso')
                                 
-                                time.sleep(1)
+                            time.sleep(1)
                             
                 if flag==False:
                     print("    ")
@@ -888,4 +888,5 @@ while True:
         print("Por: Marina Benvenuti e Iago Munoz")
         print("Programa encerrado com sucesso! ")
         break
+
 
