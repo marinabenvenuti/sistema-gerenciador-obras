@@ -55,8 +55,9 @@ class Pedreiro(Funcionario):
     def calculaSalario(self):
         self.salario = 1500+(350*(self.numObras))
         
-    def setNumObras(self):
-        self.numObras += 1
+    def setNumObras(self,droga):
+        self.numObras =droga
         
     def setNumObrasBosta(self):
         self.numObras -= 1      
+
