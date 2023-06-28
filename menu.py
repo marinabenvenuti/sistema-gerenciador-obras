@@ -274,12 +274,11 @@ def opcoesObras():
             vargra+=((months+1)*350*1.22)
             o.setTotal(vargra)     
             obras.append(o) #adicionando à lista de objetos obra
-            if len(obras)!=0:
-                for porra in obras: 
-                    for vsf in pedreiros:
-                        if porra.pedreiro==vsf:
-                            vsf.setNumObras()
-                            vsf.calculaSalario()
+             
+            for vsf in pedreiros:
+                if o.pedreiro==vsf:
+                    vsf.setNumObras()
+                    vsf.calculaSalario()
                 
             print("    ")      
             print('Obra cadastrada com sucesso!')
@@ -483,16 +482,16 @@ def opcoesObras():
                         Del_Fun_F=input('Excluir esta obra? [S/N] ').title()
                         Del_Fun_F = verificaSN(Del_Fun_F)
                         if Del_Fun_F=='S':
-                            for porra in obras: 
-                                for vsf in pedreiros:
-                                    if porra.pedreiro==vsf:
-                                        vsf.setNumObrasBosta()
-                                        vsf.calculaSalario()
-                            obras.remove(i)
-                            print("    ")
-                            print('Obra deletada com sucesso')
-                            
-                            time.sleep(1)
+                           
+                            for vsf in pedreiros:
+                                if i.pedreiro==vsf:
+                                    vsf.setNumObrasBosta()
+                                    vsf.calculaSalario()
+                                obras.remove(i)
+                                print("    ")
+                                print('Obra deletada com sucesso')
+                                
+                                time.sleep(1)
                             
                 if flag==False:
                     print("    ")
@@ -889,3 +888,4 @@ while True:
         print("Por: Marina Benvenuti e Iago Munoz")
         print("Programa encerrado com sucesso! ")
         break
+
