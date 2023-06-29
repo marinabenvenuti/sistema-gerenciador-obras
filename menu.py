@@ -152,9 +152,10 @@ def opcoesObras():
             else:
                 print("    ")
                 cliente_pesquisa = input('Digite o id da obra a ser pesquisada: ')
+                cliente_pesquisa=verificaNs(cliente_pesquisa)
                 flag=False
                 for i in obras:  # percorre a lista de obras
-                    if int(cliente_pesquisa) == i.cod: 
+                    if cliente_pesquisa == i.cod: 
                         printarObrass(i)
                         flag=True
                         
@@ -295,11 +296,11 @@ def opcoesObras():
             else:
                 print("    ")
                 cliente_pesquisa = input('Digite o nome do id da obra a ser editada: ')
-                
+                cliente_pesquisa=verificaNs(cliente_pesquisa)
                 flag=False
                 
                 for i in obras:  # percorre a lista de obras
-                    if int(cliente_pesquisa) == i.cod:  # busca pelo cliente da obra a ser alterado
+                    if cliente_pesquisa == i.cod:  # busca pelo cliente da obra a ser alterado
                         print("    ")
                         while True:
                             
@@ -391,15 +392,21 @@ def opcoesObras():
                             
                                     
                             if editaObra==4:
-                                print("    ")
-                                aux = str(input('Digite a nova data de início da obra no formado "DD/MM/AAAA": '))
-                                
-                                dataIn = verificaData(aux)
-                                print("    ")
-                                while dataIn==False:
-                                    aux = str(input('Data inválida! Digite a data de início da obra no formato "DD/MM/AAAA": '))
+                                cont=0
+                                while True:
+                                    if cont==0:
+                                        aux = str(input('Digite a nova data de início da obra no formato "DD/MM/AAAA": '))
+                                    else:
+                                        aux = str(input('Data inválida! Digite a nova data de início da obra no formato "DD/MM/AAAA": '))
                                     dataIn = verificaData(aux)
-                                dataIn = datetime.strptime(aux, '%d/%m/%Y')     
+                                    print("    ")
+                                    while dataIn==False:
+                                        aux = str(input('Data inválida! Digite a data de início da obra no formato "DD/MM/AAAA": '))
+                                        dataIn = verificaData(aux)
+                                    dataIn = datetime.strptime(aux, '%d/%m/%Y')
+                                    if dataIn<i.dataFim:
+                                        break
+                                    cont+=1
                                 kubs=0
                                 months = (i.dataFim.year - i.dataIn.year) * 12 + (i.dataFim.month - i.dataIn.month)
                                 kubs+=((months+1)*350*1.22)
@@ -468,10 +475,10 @@ def opcoesObras():
                 print('[--------------------------------Excluir obra:--------------------------------]')
                 print("    ")
                 cliente_pesquisa = input('Digite o id da obra a ser excluída: ')
-                
+                cliente_pesquisa=verificaNs(cliente_pesquisa)
                 flag=False
                 for i in obras:  # percorre a lista de obras
-                    if int(cliente_pesquisa) == i.cod: 
+                    if cliente_pesquisa == i.cod: 
                         printarObrass(i)
                         flag=True
                         print("    ")
@@ -797,24 +804,32 @@ def opcoesFuncionarios():
                         Del_Fun_F = verificaSN(Del_Fun_F)
                         
                         if Del_Fun_F=='S':
-                            if len(obras)!=0:
-                                for vsf in obras:
-                                    if vsf.pedreiro==i:
-                                        print("    ")
-                                        print("O Funcionario é Mestre de obras e está cadastrado em uma obra, altere o Mestre de obras de tal obra para poder exclui-lo")
-                                        time.sleep(1)
-                                        break
-                                    
-                                    else:
-                                        funcionarios.remove(i)
-                                        print("    ")
-                                        print('Funcionário deletado com sucesso')
-                                        time.sleep(1)
-                            else:
+                            if i.__class__.__name__=='Gestor':
                                 funcionarios.remove(i)
                                 print("    ")
                                 print('Funcionário deletado com sucesso')
                                 time.sleep(1)
+                            
+                            if i.__class__.__name__=='Pedreiro':
+                                if len(obras)==0:
+                                    funcionarios.remove(i)
+                                    print("    ")
+                                    print('Funcionário deletado com sucesso')
+                                    time.sleep(1)
+                                if len(obras)!=0:
+                                    for vsf in obras:
+                                        if vsf.pedreiro==i:
+                                            print("    ")
+                                            print("O Funcionario é Mestre de obras e está cadastrado em uma obra, altere o Mestre de obras de tal obra para poder exclui-lo")
+                                            time.sleep(1)
+                                            break
+                                        
+                                        else:
+                                            funcionarios.remove(i)
+                                            print("    ")
+                                            print('Funcionário deletado com sucesso')
+                                            time.sleep(1)
+                           
                                                            
                 if flag==False:
                     print("    ")
@@ -841,9 +856,9 @@ def faturamento():
             casbran+=((months+1)*350)
             
             dindin-=casbran
-            print("    ")
-            print('O faturamento da empresa, caso todas obras sejam acabadas em seus prazos e sem alterações, não contando com o desconto do salários dos funcionários, porém considerando o adicional por obra do pedreiro, será de R${:.2f}'.format(dindin))
-            time.sleep(2)
+        print(' ')
+        print('O faturamento da empresa, caso todas obras sejam acabadas em seus prazos e sem alterações, não contando com o desconto do salários dos funcionários, porém considerando o adicional por obra do pedreiro, será de R${:.2f}'.format(dindin))
+        time.sleep(2)
    
 #main
 Pedreiro('Igor', '00000005252', '48999934599', 16745, 1500, 0)
