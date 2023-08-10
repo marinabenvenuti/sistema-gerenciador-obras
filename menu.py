@@ -7,19 +7,6 @@ from obras import *
 from funcionarios import *
 
 def printarObra(i):
-    for i in obras:    
-        print("    ")
-        print('ID:', i.cod)
-        print ('Cliente: ', i.cliente)
-        for j in range(len(i.materiais)):
-            print (i.materiais[j]['nome'], "em quantidade de", i.materiais[j]['qtd'], "(unidade de medida em {})".format(i.materiais[j]['medição']))
-        print('Mestre de obra:', i.pedreiro.nome)
-        print('Data de início:', i.dataIn)
-        print('Data de fim:', i.dataFim)
-        print('Valor total: R${:.2f}'.format(i.total))
-        time.sleep(0.5)
-        
-def printarObrass(i):    
     print("    ")
     print('ID:', i.cod)
     print ('Cliente: ', i.cliente)
@@ -29,7 +16,7 @@ def printarObrass(i):
     print('Data de início:', i.dataIn)
     print('Data de fim:', i.dataFim)
     print('Valor total: R${:.2f}'.format(i.total))
-    time.sleep(0.5)
+    time.sleep(0.5)      
         
 def semObra():
     print("    ")
@@ -113,6 +100,21 @@ def consultaMain(x):
         x=(input("Digite novamente o número da ação: "))
     return x
 
+def printafunca(i):
+    print("    ")
+    print ('Cargo:', i.__class__.__name__)
+    print ('Cadastro:', i.cadastro)
+    print ('Nome:', i.nome)
+    print ('Salario: R${}'.format(i.salario))
+    print ('CPF: {}.{}.{}-{}'.format(i.cpf[0:3], i.cpf[3:6], i.cpf[6:9], i.cpf[9:11]))
+    print ('Contato: (0{}){}-{}'.format(i.fone[0:2], i.fone[2:7], i.fone[7:12]))
+
+    if i.__class__.__name__=='Gestor':
+        print ('Data contratação:', i.anoContrat)
+    if i.__class__.__name__=='Pedreiro':
+        print ('Presente em {} obras'.format(i.numObras))
+    time.sleep(0.25)
+
 def opcoesObras():
     while True:
         print("    ")
@@ -138,8 +140,8 @@ def opcoesObras():
             if len(obras)==0:
                 semObra()        
             else:   
-                pn=0
-                printarObra(pn)
+                for i in obras:
+                    printarObra(i)
                     
         elif consultaObra==2:
             #pesquisa de obra específica
@@ -156,7 +158,7 @@ def opcoesObras():
                 flag=False
                 for i in obras:  # percorre a lista de obras
                     if cliente_pesquisa == i.cod: 
-                        printarObrass(i)
+                        printarObra(i)
                         flag=True
                         
                 if flag==False:
@@ -479,7 +481,7 @@ def opcoesObras():
                 flag=False
                 for i in obras:  # percorre a lista de obras
                     if cliente_pesquisa == i.cod: 
-                        printarObrass(i)
+                        printarObra(i)
                         flag=True
                         print("    ")
                         Del_Fun_F=input('Excluir esta obra? [S/N] ').title()
@@ -534,19 +536,7 @@ def opcoesFuncionarios():
                 print("    ")
                 print("[--------------------------------Funcionários cadastrados:--------------------------------]")
                 for i in funcionarios:
-                    print("    ")
-                    print ('Cargo:', i.__class__.__name__)
-                    print ('Cadastro:', i.cadastro)
-                    print ('Nome:', i.nome)
-                    print ('Salario: R${}'.format(i.salario))
-                    print ('CPF: {}.{}.{}-{}'.format(i.cpf[0:3], i.cpf[3:6], i.cpf[6:9], i.cpf[9:11]))
-                    print ('Contato: (0{}){}-{}'.format(i.fone[0:2], i.fone[2:7], i.fone[7:12]))
-
-                    if i.__class__.__name__=='Gestor':
-                        print ('Data contratação:', i.anoContrat)
-                    if i.__class__.__name__=='Pedreiro':
-                        print ('Presente em {} obras'.format(i.numObras))
-                    time.sleep(0.25)
+                    printafunca(i)
                 time.sleep(2)
                         
         if consultaFunc==2:
@@ -562,19 +552,7 @@ def opcoesFuncionarios():
                 for i in funcionarios:
                     if i.nome==Pes_Fun:
                         flag=True
-                        print ("   ")
-                        print ('Cargo:', i.__class__.__name__)
-                        print ('Cadastro:', i.cadastro)
-                        print ('Nome:', i.nome)
-                        print ('Salario: R${}'.format(i.salario))
-                        print ('CPF: {}.{}.{}-{}'.format(i.cpf[0:3], i.cpf[3:6], i.cpf[6:9], i.cpf[9:11]))
-                        print ('Contato: (0{}){}-{}'.format(i.fone[0:2], i.fone[2:7], i.fone[7:12]))
-                        
-                        if i.__class__.__name__=='Gestor':
-                            print ('Data contrataçao:', i.anoContrat)
-                        if i.__class__.__name__=='Pedreiro':
-                            print ('Presente em {} obras'.format(i.numObras))
-                        time.sleep(2)
+                        printafunca(i)
                             
                 if flag==False:
                     print("    ")
@@ -899,5 +877,3 @@ while True:
         print("Por: Marina Benvenuti e Iago Munoz")
         print("Programa encerrado com sucesso! ")
         break
-
-
